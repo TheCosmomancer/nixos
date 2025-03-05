@@ -40,8 +40,9 @@
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "us";
+    layout = "us,ir";
     variant = "";
+    options = "grp:alt_shift_toggle";
   };
 
   # Enable CUPS to print documents.
@@ -69,16 +70,18 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.cosmomancer = {
     isNormalUser = true;
-    description = "Farbod";
+    description = "Cosmomancer";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
+  security.sudo.extraRules = [{
+    users = ["cosmomancer"];
+    commands = [{command ="ALL";
+    options =["NOPASSWD"];
+    }];
+  }];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -87,7 +90,22 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    wget
+    vscode
+    brave
+    steam
+    nekoray
+    telegram-desktop
+    bitwarden-desktop
+    librewolf
+    python314Full
+    cockatrice
+    neofetch
+    git
+    #jetbrains.pycharm-community
+    #genymotion
+    github-desktop
+    gh
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -101,7 +119,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
