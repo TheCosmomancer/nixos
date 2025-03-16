@@ -152,6 +152,9 @@
     #genymotion
     gh
     discord
+    libreoffice
+    qalculate-qt
+    gimp-with-plugins
   ];
   nix.gc = {
     automatic = true;  # Enable the automatic garbage collector
