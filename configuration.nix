@@ -76,7 +76,9 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
   hardware.nvidia.prime = {
-    sync.enable = true;
+    reverseSync.enable = true;
+    # Enable if using an external GPU
+    allowExternalGpu = false;
 		# Make sure to use the correct Bus ID values for your system!
 		intelBusId = "PCI:0:1:0";
 		nvidiaBusId = "PCI:0:6:0";
