@@ -151,7 +151,7 @@
     cockatrice
     neofetch
     git
-    jetbrains.pycharm-community
+    #jetbrains.pycharm-community
     #genymotion
     gh
     discord
