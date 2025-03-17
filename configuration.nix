@@ -146,11 +146,12 @@
     telegram-desktop
     bitwarden-desktop
     librewolf
-    python314Full
+    python312Full
+    uv
     cockatrice
     neofetch
     git
-    #jetbrains.pycharm-community
+    jetbrains.pycharm-community
     #genymotion
     gh
     discord
