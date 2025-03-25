@@ -109,6 +109,7 @@
     kitty
     neofetch
     git
+    gh
     vlc
     brave
     vscode
