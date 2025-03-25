@@ -34,22 +34,6 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    
-    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "vscode"
-    ]
-    pkgs.brave
-    pkgs.nekoray
-    pkgs.telegram-desktop
-    pkgs.bitwarden-desktop
-    pkgs.librewolf
-    pkgs.python312Full
-    pkgs.uv
-    pkgs.cockatrice
-    pkgs.libreoffice
-    pkgs.qalculate-qt
-    pkgs.gimp-with-plugins
-    pkgs.obs-studio
     #jetbrains.pycharm-community
     #genymotion
   ];
