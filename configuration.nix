@@ -39,7 +39,6 @@
   services.displayManager.sddm.enable = true;
   programs.hyprland = {
     enable = true;
-    nvidiaPatches = true;
     xwayland.enable = true;
   };
   services.desktopManager.plasma6.enable = true;
@@ -55,7 +54,6 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
