@@ -35,7 +35,9 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     
-    pkgs.vscode
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "vscode"
+    ]
     pkgs.brave
     pkgs.nekoray
     pkgs.telegram-desktop
