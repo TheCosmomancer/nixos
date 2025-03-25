@@ -75,6 +75,19 @@
     description = "Cosmomancer";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
+    vscode
+    brave
+    nekoray
+    telegram-desktop
+    bitwarden-desktop
+    librewolf
+    python312Full
+    uv
+    cockatrice
+    libreoffice
+    qalculate-qt
+    gimp-with-plugins
+    obs-studio
     ];
   };
 
