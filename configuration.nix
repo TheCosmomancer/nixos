@@ -37,9 +37,13 @@
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    nvidiaPatches = true;
+    xwayland.enable = true;
+  };
   services.desktopManager.plasma6.enable = true;
-  services.displayManager.defaultSession = "plasma";
+  services.displayManager.defaultSession = "hyprland";
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us,ir";
@@ -51,6 +55,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
+  sound.enable = true;
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -59,7 +64,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -75,19 +80,12 @@
     description = "Cosmomancer";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-    vscode
-    brave
     nekoray
     telegram-desktop
     bitwarden-desktop
-    librewolf
     python312Full
     uv
     cockatrice
-    libreoffice
-    qalculate-qt
-    gimp-with-plugins
-    obs-studio
     ];
   };
 
@@ -111,8 +109,32 @@
     kitty
     neofetch
     git
-    gh
+    vlc
+    brave
+    vscode
+    libreoffice
+    qalculate-qt
+    gimp-with-plugins
+    obs-studio
+    waybar
+    libnotify
+    dunst
+    hyprpaper
+    alacritty
+    rofi-wayland
   ];
+  environment.sessionVariables ={
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+  };
+  hardware= {
+    opengl.enable = true;
+    nvidia.modesetting.enable = true;
+  };
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal];
+  };
   nix.gc = {
     automatic = true;  # Enable the automatic garbage collector
     dates = "weekly";   # When to run the garbage collector

@@ -15,6 +15,19 @@
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
+
+  programs.git = {
+    enable = true;
+    userName = "TheCosmomancer";
+    userEmail = "lecosmomancer@gmail.com";
+    aliases = {
+      ch = "checkout";
+      c = "commit -m";
+      ca = "commit -am";
+    };
+  };
+
+  #xdg.mimeApps.defaultApplications = {};
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
