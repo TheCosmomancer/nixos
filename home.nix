@@ -34,6 +34,22 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    
+    vscode
+    brave
+    nekoray
+    telegram-desktop
+    bitwarden-desktop
+    librewolf
+    python312Full
+    uv
+    cockatrice
+    libreoffice
+    qalculate-qt
+    gimp-with-plugins
+    obs-studio
+    #jetbrains.pycharm-community
+    #genymotion
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
