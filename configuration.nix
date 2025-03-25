@@ -2,12 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+        inputs.home-manager.nixosModules.default
     ];
 
   # Bootloader.
@@ -36,7 +37,9 @@
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
+  programs.hyprland.enable = true;
   services.desktopManager.plasma6.enable = true;
+  services.displayManager.defaultSession = "plasma";
   # Install nvidia drivers
   hardware.graphics = {
     enable = true;
@@ -132,16 +135,15 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-
+  #allow flakes
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    wget
     vscode
     brave
-    steam
     nekoray
     telegram-desktop
     bitwarden-desktop
@@ -151,13 +153,15 @@
     cockatrice
     neofetch
     git
-    #jetbrains.pycharm-community
-    #genymotion
     gh
     discord
     libreoffice
     qalculate-qt
     gimp-with-plugins
+    kitty
+    obs-studio
+    #jetbrains.pycharm-community
+    #genymotion
   ];
   nix.gc = {
     automatic = true;  # Enable the automatic garbage collector
