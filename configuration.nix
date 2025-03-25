@@ -99,7 +99,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -126,13 +126,14 @@
     ];
   };
 
-  security.sudo.extraRules = [{
-    users = ["cosmomancer"];
-    commands = [{command ="ALL";
-    options =["NOPASSWD"];
-    }];
-  }];
-
+  security.sudo.wheelNeedsPassword = false;
+  
+  home-manager = {
+    extraSpecialArgs = {inherit inputs; };
+    users = {
+      "cosmomancer" = import ./home.nix;
+    };
+  };
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   #allow flakes
@@ -154,7 +155,6 @@
     neofetch
     git
     gh
-    discord
     libreoffice
     qalculate-qt
     gimp-with-plugins
