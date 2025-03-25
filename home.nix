@@ -83,7 +83,12 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
-
+  home.file = {
+    ".config/hypr/hyprpaper.conf".text = ''
+    preload = /home/cosmomancer/Pictures/wallpaper.jpg
+    wallpaper = , /home/cosmomancer/Pictures/wallpaper.jpg
+    '';
+  };
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

@@ -41,7 +41,9 @@
     enable = true;
     xwayland.enable = true;
   };
+  
   services.desktopManager.plasma6.enable = true;
+  #environment.plasma6.excludePackages = with pkgs; [ kwallet kwallet-pam kwalletmanager ];
   services.displayManager.defaultSession = "hyprland";
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -120,6 +122,9 @@
     hyprpaper
     alacritty
     rofi-wayland
+    networkmanagerapplet
+    hyprpolkitagent
+    swayimg
   ];
   environment.sessionVariables ={
     WLR_NO_HARDWARE_CURSORS = "1";
@@ -127,7 +132,7 @@
   };
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal];
+    extraPortals = [pkgs.xdg-desktop-portal-hyprland];
   };
   nix.gc = {
     automatic = true;  # Enable the automatic garbage collector
