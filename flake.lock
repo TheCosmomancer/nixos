@@ -1,43 +1,5 @@
 {
   "nodes": {
-    "darkmatter-grub-theme": {
-      "inputs": {
-        "flake-compat": "flake-compat",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1740979502,
-        "narHash": "sha256-VrLE8TzW8zQ2jdhCV+Nv9wN6f15AR4yQj6M4u7pRvnk=",
-        "owner": "VandalByte",
-        "repo": "darkmatter-grub2-theme",
-        "rev": "4304753ecd423a6e2115f11a2591be5692a5ed44",
-        "type": "github"
-      },
-      "original": {
-        "owner": "VandalByte",
-        "ref": "main",
-        "repo": "darkmatter-grub2-theme",
-        "type": "github"
-      }
-    },
-    "flake-compat": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1673956053,
-        "narHash": "sha256-4gtG9iQuiKITOjNQQeQIpoIB6b16fm+504Ch3sNKLd8=",
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "rev": "35bb57c0c8d8b62bbfd284272c928ceb64ddbde9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -76,7 +38,6 @@
     },
     "root": {
       "inputs": {
-        "darkmatter-grub-theme": "darkmatter-grub-theme",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"
       }
