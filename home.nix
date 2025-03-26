@@ -83,6 +83,7 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
+
   home.file = {
     ".config/hypr/hyprpaper.conf".text = ''
     preload = /home/cosmomancer/Pictures/wallpaper.jpg
