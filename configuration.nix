@@ -12,9 +12,21 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+  # Use the GRUB 2 boot loader.
+  loader.grub = {
+    enable = true;
+    version = 2;
 
+    darkmatter-theme = {
+      enable = true;
+      style = "nixos";
+      icon = "color";
+      resolution = "1080p";
+    };
+  };
+};
+  
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -124,7 +136,7 @@
     rofi-wayland
     hyprpolkitagent
     eww
-    swayimg
+    nomacs
   ];
   environment.sessionVariables ={
     WLR_NO_HARDWARE_CURSORS = "1";
