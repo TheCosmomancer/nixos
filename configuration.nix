@@ -12,7 +12,6 @@
     ];
 
   # Bootloader.
-  # Use the GRUB 2 boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   
@@ -36,8 +35,9 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
+  # Enable the hyprland.
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -123,10 +123,16 @@
     rofi-wayland
     hyprpolkitagent
     eww
-    nomacs
-    nautilus
     cmatrix
     cbonsai
+    swayimg
+    xfce.xfconf
+    xfce.thunar
+    xfce.thunar-media-tags-plugin
+    xfce.thunar-archive-plugin
+    xfce.thunar-volman
+    #bottles
+    #clamav
   ];
   environment.sessionVariables ={
     WLR_NO_HARDWARE_CURSORS = "1";
