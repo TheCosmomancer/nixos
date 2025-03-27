@@ -127,6 +127,7 @@
     cbonsai
     swayimg
     xfce.xfconf
+    xfce.tumbler
     xfce.thunar
     xfce.thunar-media-tags-plugin
     xfce.thunar-archive-plugin
