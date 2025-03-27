@@ -80,7 +80,6 @@
     nekoray
     telegram-desktop
     bitwarden-desktop
-    python312Full
     uv
     cockatrice
     ];
