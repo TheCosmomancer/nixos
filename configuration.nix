@@ -134,7 +134,12 @@
     xfce.thunar-media-tags-plugin
     xfce.thunar-archive-plugin
     xfce.thunar-volman
+    nwg-look
+    dracula-icon-theme
+    lavanda-gtk-theme
+    bibata-cursors
     #bottles
+    #heroic #gamelauncher for everything
     #clamav
   ];
   environment.sessionVariables ={
