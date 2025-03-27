@@ -42,10 +42,6 @@
     enable = true;
     xwayland.enable = true;
   };
-  
-  services.desktopManager.plasma6.enable = true;
-  #environment.plasma6.excludePackages = with pkgs; [ kwallet kwallet-pam kwalletmanager ];
-  services.displayManager.defaultSession = "hyprland";
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us,ir";
