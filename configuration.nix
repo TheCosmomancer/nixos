@@ -128,6 +128,9 @@
     hyprpolkitagent
     eww
     nomacs
+    nautilus
+    cmatrix
+    cbonsai
   ];
   environment.sessionVariables ={
     WLR_NO_HARDWARE_CURSORS = "1";
