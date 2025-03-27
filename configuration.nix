@@ -122,6 +122,8 @@
     alacritty
     rofi-wayland
     hyprpolkitagent
+    hyprcursor
+    hyprland-qtutils
     eww
     cmatrix
     cbonsai
