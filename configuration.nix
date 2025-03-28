@@ -80,7 +80,6 @@
     nekoray
     telegram-desktop
     bitwarden-desktop
-    uv
     cockatrice
     ];
   };
