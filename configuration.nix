@@ -42,6 +42,9 @@
     enable = true;
     xwayland.enable = true;
   };
+
+  services.logind.lidSwitch = "ignore";
+  
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us,ir";
@@ -50,7 +53,7 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.logind.extraConfig = "HandleLidSwitch=ignore";
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -116,7 +119,7 @@
     waybar
     libnotify
     dunst
-    hyprpaper
+    mpvpaper
     alacritty
     rofi-wayland
     hyprpolkitagent
@@ -135,8 +138,8 @@
     dracula-icon-theme
     lavanda-gtk-theme
     bibata-cursors
-    #bottles
-    #heroic #gamelauncher for everything
+    bottles
+    peazip
     #clamav
   ];
   environment.sessionVariables ={
