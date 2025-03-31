@@ -85,11 +85,6 @@
   };
 
   home.file = {
-    ".config/hypr/hyprpaper.conf".text = ''
-    preload = /home/cosmomancer/Pictures/wallpaper.jpg
-    wallpaper = , /home/cosmomancer/Pictures/wallpaper.jpg
-    '';
-
     ".config/alacritty/alacritty.toml".text = ''
     [general]
     import = [
