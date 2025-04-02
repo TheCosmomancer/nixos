@@ -78,7 +78,7 @@
   users.users.cosmomancer = {
     isNormalUser = true;
     description = "Cosmomancer";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input" ];
     packages = with pkgs; [
     nekoray
     telegram-desktop
@@ -105,8 +105,38 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    neofetch
+    #hyprland
+    hyprpolkitagent
+    mpvpaper
+    alacritty
+    rofi-wayland
+    xfce.xfconf
+    xfce.tumbler
+    xfce.thunar
+    xfce.thunar-media-tags-plugin
+    xfce.thunar-archive-plugin
+    xfce.thunar-volman
+    hyprland-qtutils
+    #hyprpanel
+    hyprpanel
+    bluez
+    wireplumber
+    libgtop
+    networkmanager
+    dart-sass
+    wl-clipboard
+    upower
+    gvfs
+    python312Full
+    python312Packages.gpustat
+    brightnessctl
+    power-profiles-daemon
+    grimblast
+    hyprsunset
+    btop
+    matugen
+    swww
+    #apps
     git
     gh
     vlc
@@ -116,32 +146,24 @@
     qalculate-qt
     gimp-with-plugins
     obs-studio
-    waybar
-    libnotify
-    dunst
-    mpvpaper
-    alacritty
-    rofi-wayland
-    hyprpolkitagent
-    hyprland-qtutils
-    eww
+    swayimg
+    bottles
+    peazip
+    #fun &flair
+    fastfetch
     cmatrix
     cbonsai
-    swayimg
-    xfce.xfconf
-    xfce.tumbler
-    xfce.thunar
-    xfce.thunar-media-tags-plugin
-    xfce.thunar-archive-plugin
-    xfce.thunar-volman
     nwg-look
     dracula-icon-theme
     lavanda-gtk-theme
     bibata-cursors
-    bottles
-    peazip
-    #clamav
+    #nerd-fonts.jetbrains-mono MAKE SURE to manually install
   ];
+
+  hardware.bluetooth.enable = true;
+  services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
+
   environment.sessionVariables ={
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";

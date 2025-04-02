@@ -91,7 +91,13 @@
     "~/.config/alacritty/theme.toml"
     ]
     '';
-
+    ".config/hypr/startup.sh".text = ''
+    hyprpanel&
+    mpvpaper '*' /etc/nixos/media/spacecabin.mp4 -o "loop file"
+    '';
+    ".bashrc".text = ''
+    fastfetch
+    '';
     ".config/alacritty/theme.toml".text = ''
     # Default colors
     [colors.primary]
