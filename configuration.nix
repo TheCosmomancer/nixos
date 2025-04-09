@@ -12,8 +12,16 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+		systemd-boot.enable = false;
+		efi.canTouchEfiVariables = true;
+		grub = {
+			efiSupport = true;
+			enable = true;
+			useOSProber = true;
+			device = "nodev";
+		};
+	};
   
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -36,8 +44,7 @@
   services.xserver.enable = true;
 
   # Enable the hyprland.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
+  services.xserver.displayManager.lightdm.enable = true;
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -49,7 +56,7 @@
   services.xserver.xkb = {
     layout = "us,ir";
     variant = "";
-    options = "grp:alt_shift_toggle";
+    options = "grp:alt_shift_toggle,caps:super";
   };
 
   # Enable CUPS to print documents.
@@ -79,6 +86,7 @@
     isNormalUser = true;
     description = "Cosmomancer";
     extraGroups = [ "networkmanager" "wheel" "input" ];
+    shell = pkgs.zsh;
     packages = with pkgs; [
     nekoray
     telegram-desktop
@@ -107,8 +115,8 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #hyprland
     hyprpolkitagent
-    mpvpaper
-    alacritty
+    hyprpaper
+    ghostty
     rofi-wayland
     xfce.xfconf
     xfce.tumbler
@@ -119,34 +127,33 @@
     hyprland-qtutils
     #hyprpanel
     hyprpanel
-    bluez
     wireplumber
     libgtop
-    networkmanager
+    networkmanagerapplet
     dart-sass
     wl-clipboard
     upower
     gvfs
-    python312Full
-    python312Packages.gpustat
     brightnessctl
-    power-profiles-daemon
     grimblast
     hyprsunset
     btop
     matugen
     swww
     #apps
+    lm_sensors
     git
     gh
     vlc
     brave
+    librewolf
     vscode
     libreoffice
     qalculate-qt
     gimp-with-plugins
     obs-studio
-    swayimg
+    xreader
+    nomacs
     bottles
     peazip
     #fun &flair
@@ -158,11 +165,13 @@
     lavanda-gtk-theme
     bibata-cursors
     #nerd-fonts.jetbrains-mono MAKE SURE to manually install
-  ];
+  ]; # rofi, hyprpaper, vscode and firefox anve some nice home-manager support
 
-  hardware.bluetooth.enable = true;
+  programs.zsh.enable = true;
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
+  #services.tlp.enable = true;
+  services.thermald.enable = true;
 
   environment.sessionVariables ={
     WLR_NO_HARDWARE_CURSORS = "1";
