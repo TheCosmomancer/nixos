@@ -15,17 +15,39 @@
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
-
-  programs.git = {
-    enable = true;
-    userName = "TheCosmomancer";
-    userEmail = "lecosmomancer@gmail.com";
-    aliases = {
-      ch = "checkout";
-      c = "commit -m";
-      ca = "commit -am";
+  programs.zsh = {
+  
+  enable = true;
+  initExtraFirst = "zstyle ':completion:*' completer _complete _ignored _correct _approximate\nzstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'";
+  enableCompletion = true;
+  autosuggestion.enable = true;
+  syntaxHighlighting.enable = true;
+  autocd = true;
+  
+  plugins = [
+    {
+      name = "powerlevel10k";
+      src = pkgs.zsh-powerlevel10k;
+      file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    }
+    {
+    name = "zsh-nix-shell";
+    file = "nix-shell.plugin.zsh";
+    src = pkgs.fetchFromGitHub {
+      owner = "chisui";
+      repo = "zsh-nix-shell";
+      rev = "v0.8.0";
+      sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
     };
+    }
+  ];
+  shellAliases = {
+      update = "sudo nixos-rebuild switch --flake /etc/nixos#cosmomancer";
+      flakeupdate = "sudo nix flake update";
+      CD = "echo 'C DEEZ NUTS'";
   };
+  initExtra = "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh\ntypeset -g POWERLEVEL9K_INSTANT_PROMPT=off\nfastfetch";
+};
 
   #xdg.mimeApps.defaultApplications = {};
   # The home.packages option allows you to install Nix packages into your
@@ -62,74 +84,6 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-  };
-
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/cosmomancer/etc/profile.d/hm-session-vars.sh
-  #
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
-
-  home.file = {
-    ".config/alacritty/alacritty.toml".text = ''
-    [general]
-    import = [
-    "~/.config/alacritty/theme.toml"
-    ]
-    '';
-    ".config/hypr/startup.sh".text = ''
-    hyprpanel&
-    mpvpaper '*' /etc/nixos/media/spacecabin.mp4 -o "loop file"
-    '';
-    ".bashrc".text = ''
-    fastfetch
-    '';
-    ".config/alacritty/theme.toml".text = ''
-    # Default colors
-    [colors.primary]
-    background = '#1d2021'
-    foreground = '#d4be98'
-
-    # Normal colors
-    [colors.normal]
-    black   = '#32302f'
-    red     = '#ea6962'
-    green   = '#478ac3'
-    yellow  = '#d8a657'
-    blue    = '#7daea3'
-    magenta = '#d3869b'
-    cyan    = '#89b482'
-    white   = '#d4be98'
-
-    # Bright colors (same as normal colors)
-    [colors.bright]
-    black   = '#32302f'
-    red     = '#ea6962'
-    green   = '#478ac3'
-    yellow  = '#d8a657'
-    blue    = '#7daea3'
-    magenta = '#d3869b'
-    cyan    = '#89b482'
-    white   = '#d4be98'
-
-    [colors.selection]
-    background = '#32302f'
-    foreground = '#ba9d09'
-    '';
     ".local/share/rofi/themes/rounded-common.rasi".text = ''
     * {
         font:   "Roboto 12";
@@ -242,7 +196,27 @@
         text-color: @bg1;
     }
     '';
-    };
+  };
+
+  # Home Manager can also manage your environment variables through
+  # 'home.sessionVariables'. These will be explicitly sourced when using a
+  # shell provided by Home Manager. If you don't want to manage your shell
+  # through Home Manager then you have to manually source 'hm-session-vars.sh'
+  # located at either
+  #
+  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  /etc/profiles/per-user/cosmomancer/etc/profile.d/hm-session-vars.sh
+  #
+  home.sessionVariables = {
+    # EDITOR = "emacs";
+  };
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
