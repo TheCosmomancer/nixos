@@ -126,7 +126,7 @@
     xfce.thunar-volman
     hyprland-qtutils
     #hyprpanel
-    hyprpanel
+    #hyprpanel
     wireplumber
     libgtop
     networkmanagerapplet
@@ -227,22 +227,22 @@
   };
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
+#  services.xserver.videoDrivers = ["nvidia"];
 
-  hardware.nvidia = {
+#  hardware.nvidia = {
 
     # Modesetting is required.
-    modesetting.enable = true;
+#    modesetting.enable = true;
 
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
     # Enable this if you have graphical corruption issues or application crashes after waking
     # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
     # of just the bare essentials.
-    powerManagement.enable = false;
+#    powerManagement.enable = false;
 
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = true;
+#    powerManagement.finegrained = true;
 
     # Use the NVidia open source kernel module (not to be confused with the
     # independent third-party "nouveau" open source driver).
@@ -250,23 +250,23 @@
     # supported GPUs is at: 
     # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
     # Only available from driver 515.43.04+
-    open = false;
-
-    # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
-    nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-  hardware.nvidia.prime = {
-    reverseSync.enable = true;
-    # Enable if using an external GPU
-    allowExternalGpu = false;
-		# Make sure to use the correct Bus ID values for your system!
-		intelBusId = "PCI:0:1:0";
-		nvidiaBusId = "PCI:0:6:0";
-                # amdgpuBusId = "PCI:54:0:0"; For AMD GPU
-	};
-  hardware.graphics.enable32Bit = true;
+#    open = false;
+#
+#    # Enable the Nvidia settings menu,
+#	# accessible via `nvidia-settings`.
+#    nvidiaSettings = true;
+#
+#    # Optionally, you may need to select the appropriate driver version for your specific GPU.
+#    package = config.boot.kernelPackages.nvidiaPackages.stable;
+#  };
+#  hardware.nvidia.prime = {
+#    reverseSync.enable = true;
+#    # Enable if using an external GPU
+#    allowExternalGpu = false;
+#		# Make sure to use the correct Bus ID values for your system!
+#		intelBusId = "PCI:0:1:0";
+#		nvidiaBusId = "PCI:0:6:0";
+#                # amdgpuBusId = "PCI:54:0:0"; For AMD GPU
+#	};
+#  hardware.graphics.enable32Bit = true;
 }
