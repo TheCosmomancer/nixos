@@ -8,6 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
+    distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
@@ -18,6 +19,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./configuration.nix
+        inputs.distro-grub-themes.nixosModules.${"x86_64-linux"}.default
         inputs.home-manager.nixosModules.default
         {nixpkgs.overlays = [inputs.hyprpanel.overlay];}
       ];
