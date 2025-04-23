@@ -42,9 +42,14 @@
   services.xserver.enable = true;
 
   # Enable the hyprland.
-  services.xserver.displayManager.gdm = {
+ services.displayManager.sddm = {
     enable = true;
-    wayland = true;
+    package = pkgs.kdePackages.sddm;
+
+    theme = "sddm-astronaut-theme";
+    extraPackages = [pkgs.sddm-astronaut];
+
+    wayland.enable = true;
   };
   programs.hyprland = {
     enable = true;
@@ -76,8 +81,8 @@
   };
 
   # Enable touchpad support and disable the lid closure switch for useage 
-  #while connected to a montitor.
-  services.xserver.libinput.enable = true;
+  # while connected to a montitor.
+  services.libinput.enable = true;
   services.logind.lidSwitch = "ignore";
   services.logind.extraConfig = "HandleLidSwitch=ignore";
 
@@ -96,10 +101,17 @@
   };
 
   security.sudo.extraRules = [
-    { users = [ "cosmomancer" ];
-      options = [ "NOPASSWD" ];
-    }
-  ];
+  {
+    users = [ "cosmomancer" ];
+    commands = [
+      {
+        command = "ALL";
+        options = [ "SETENV" "NOPASSWD" ];
+      }
+    ];
+  }
+];
+
 
   home-manager = {
     extraSpecialArgs = {inherit inputs; };
@@ -115,18 +127,12 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
   environment.systemPackages = with pkgs; [
     #hyprland
-    hyprpolkitagent
     polkit_gnome
     hyprpaper
     ghostty
     rofi-wayland
-    xfce.xfconf
-    xfce.tumbler
-    xfce.thunar
-    xfce.thunar-media-tags-plugin
-    xfce.thunar-archive-plugin
-    xfce.thunar-volman
     hyprland-qtutils
+    waybar
     #hyprpanel
     hyprpanel
     wireplumber
@@ -134,14 +140,7 @@
     networkmanagerapplet
     dart-sass
     wl-clipboard
-    upower
-    gvfs
     brightnessctl
-    grimblast
-    hyprsunset
-    btop
-    matugen
-    swww
     #apps
     lm_sensors
     git
@@ -158,11 +157,14 @@
     nomacs
     bottles
     peazip
-    wget
-    # List packages installed in system profile. To search, run:
-    # $ nix search wget
-
-    #fun &flair
+    file-roller
+    grimblast
+    btop
+    ventoy-full-gtk
+    obsidian
+    python312Full
+    ranger
+    #fun & flair
     fastfetch
     cmatrix
     cbonsai
@@ -171,14 +173,48 @@
     dracula-icon-theme
     lavanda-gtk-theme
     bibata-cursors
+    libsForQt5.qt5.qtquickcontrols2
     sddm-sugar-dark
+    sddm-astronaut
     #nerd-fonts.jetbrains-mono MAKE SURE to manually install
   ]; # TODO firefox home-manager
+
+  # Polkit
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+      };
+    };
+  };
 
   programs.zsh.enable = true;
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
   services.thermald.enable = true;
+  programs.xfconf.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-media-tags-plugin
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "cosmomancer" ];
+  virtualisation.virtualbox.host.enableKvm = true;
+  virtualisation.virtualbox.host.addNetworkInterface = false;
 
   environment.sessionVariables ={
     WLR_NO_HARDWARE_CURSORS = "1";
