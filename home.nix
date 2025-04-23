@@ -35,7 +35,6 @@
   shellAliases = {
       update = "sudo nixos-rebuild switch --flake /etc/nixos#cosmomancer";
       flakeupdate = "sudo nix flake update";
-      CD = "echo 'C DEEZ NUTS'";
     };
   initExtra = "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh\ntypeset -g POWERLEVEL9K_INSTANT_PROMPT=off\nfastfetch";
   };
@@ -45,6 +44,29 @@
         preload = ["/etc/nixos/media/astronautdesert.png"];
         wallpaper = [",/etc/nixos/media/astronautdesert.png"];
     }; 
+  };
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+    style = {
+        #name = ;
+        #package = pkgs.;
+    };
+  };
+  gtk = {
+    enable = true;
+    cursorTheme ={
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Classic";
+    };
+    #theme = {
+        #package = pkgs.;
+        #name = ;
+    #};
+    #iconTheme = {
+        #package = pkgs.;
+        #name = ;
+    #};
   };
   nixpkgs.config.allowUnfree = true;
   programs.vscode = {
@@ -57,10 +79,13 @@
     ms-python.python 
     esbenp.prettier-vscode 
     visualstudioexptteam.vscodeintellicode
-    usernamehw.errorlens
     jgclark.vscode-todo-highlight
     ];
     };
+  };
+  programs.firefox = {
+    enable = true;
+    package =pkgs.librewolf;
   };
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -298,13 +323,14 @@
     $terminal = ghostty
     $fileManager = thunar
     $menu = rofi --show drun
+    $screenshot = grimblast --notify --freeze save area ~/grimblast/screenshot.png
 
     #################
     ### AUTOSTART ###
     #################
 
     exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-    exec-once = systemctl --user start hyprpolkitagent
+    exec-once = systemctl --user start polkit-gnome-authentication-agent-1
     exec-once = hyprctl setcursor Bibata-Modern-Classic 24
     exec-once = hyprpanel
     exec-once = nm-applet
@@ -342,8 +368,7 @@
     }
 
     decoration {
-        rounding = 20
-        rounding_power =    8.0
+        rounding = 7
 
         shadow {
             enabled = true
@@ -423,10 +448,10 @@
 
     # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
     bind = $mainMod, Q, exec, $terminal
-    bind = $mainMod, W, exec, rofi -show drun -show-icons
+    bind = $mainMod, A, exec, rofi -show drun -show-icons
     bind = $mainMod, E, exec, $fileManager
-    bind = $mainMod, R, exec, $menu - show recursivebrowser
-    bind = $mainMod, F, killactive,
+    bind = $mainMod, S, exec, $screenshot
+    bind = $mainMod, C, killactive,
     bind = $mainMod, M, exit,
     bind = $mainMod, V, togglefloating,
 
