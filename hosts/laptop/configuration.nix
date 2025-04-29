@@ -4,10 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
-      ../../modules/config/firefox.nix
-      ../../modules/config/nvidia.nix
-      #../../modules/config/zsh.nix
-      ../../modules/config/thunar.nix
+      ../../modules/config
       inputs.home-manager.nixosModules.default
     ];
 
@@ -46,21 +43,7 @@
   services.xserver.enable = true;
 
   # Enable the hyprland.
-  services.displayManager.sddm = {
-    enable = true;
-    package = pkgs.libsForQt5.sddm;
-    wayland.enable = true;
-    sugarCandyNix = {
-      enable = true;
-      settings = {
-        Background = /etc/nixos/media/castle.png;
-        ScreenWidth = 1920;
-        ScreenHeight = 1080;
-        FormPosition = "left";
-      };
-    };
-  };
-  services.xserver.displayManager.setupCommands = "xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-A-1 --same-as eDP-1";
+  services.displayManager.sddm.enable = true;
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -102,12 +85,6 @@
     description = "cosmomancer";
     extraGroups = [ "networkmanager" "wheel" "input" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [
-    nekoray
-    telegram-desktop
-    bitwarden-desktop
-    cockatrice
-    ];
   };
 
   security.sudo.extraRules = [
@@ -136,21 +113,6 @@
   #allow flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
   environment.systemPackages = with pkgs; [
-    #hyprland
-    polkit_gnome
-    hyprpaper
-    ghostty
-    rofi-wayland
-    hyprland-qtutils
-    waybar
-    #hyprpanel
-    hyprpanel
-    wireplumber
-    libgtop
-    networkmanagerapplet
-    dart-sass
-    wl-clipboard
-    brightnessctl
     #apps
     lm_sensors
     git
@@ -175,6 +137,11 @@
     pywal16
     imagemagick
     ranger
+    nekoray
+    telegram-desktop
+    bitwarden-desktop
+    cockatrice
+
     #fun & flair
     fastfetch
     cmatrix
@@ -187,31 +154,10 @@
     #nerd-fonts.jetbrains-mono MAKE SURE to manually install
   ]; # TODO firefox home-manager
 
-  # Polkit
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-      };
-    };
-  };
-  
   programs.zsh.enable = true;
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
   services.thermald.enable = true;
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "cosmomancer" ];
-  virtualisation.virtualbox.host.enableKvm = true;
-  virtualisation.virtualbox.host.addNetworkInterface = false;
 
   environment.sessionVariables ={
     WLR_NO_HARDWARE_CURSORS = "1";
