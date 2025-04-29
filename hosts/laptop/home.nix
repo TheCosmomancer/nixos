@@ -33,7 +33,7 @@
     }
   ];
   shellAliases = {
-      update = "sudo nixos-rebuild switch --flake /etc/nixos#cosmomancer";
+      update = "sudo nixos-rebuild switch --flake /etc/nixos/hosts/laptop/#cosmomancer";
       flakeupdate = "sudo nix flake update";
     };
   initExtra = "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh\ntypeset -g POWERLEVEL9K_INSTANT_PROMPT=off\nfastfetch";
@@ -45,20 +45,20 @@
         wallpaper = [",/etc/nixos/media/astronautdesert.png"];
     }; 
   };
-  qt = {
-    enable = true;
-    platformTheme = "gtk";
-    style = {
+  #qt = {
+    #enable = true;
+    #platformTheme = "kde";
+    #style = {
         #name = ;
         #package = pkgs.;
-    };
-  };
-  gtk = {
-    enable = true;
-    cursorTheme ={
-        package = pkgs.bibata-cursors;
-        name = "Bibata-Modern-Classic";
-    };
+    #};
+  #};
+  #gtk = {
+    #enable = true;
+    #cursorTheme ={
+        #package = pkgs.bibata-cursors;
+        #name = "Bibata-Modern-Classic";
+    #};
     #theme = {
         #package = pkgs.;
         #name = ;
@@ -67,13 +67,21 @@
         #package = pkgs.;
         #name = ;
     #};
-  };
+  #};
   nixpkgs.config.allowUnfree = true;
   programs.vscode = {
     enable = true;
     profiles.default = {
-    enableUpdateCheck = false;
-    enableExtensionUpdateCheck = false;
+        enableUpdateCheck = false;
+        enableExtensionUpdateCheck = false;
+        userSettings = {
+            "telemetry.telemetryLevel" = "off";
+            "files.autoSave" = "onFocusChange";
+            "editor.formatOnPaste" = true;
+            "workbench.preferredHighContrastColorTheme" = "Default Dark Modern";
+            "terminal.external.linuxExec" = "ghostty";
+        };
+    };
     extensions = with pkgs.vscode-extensions; [
     bbenoist.nix 
     ms-python.python 
@@ -81,11 +89,22 @@
     visualstudioexptteam.vscodeintellicode
     jgclark.vscode-todo-highlight
     ];
-    };
   };
   programs.firefox = {
     enable = true;
-    package =pkgs.librewolf;
+    profiles.default = {
+        id = 0;
+        name = "default";
+        isDefault = true;
+        settings = {
+            "browser.search.defaultenginename" = "brave";
+        };
+        search = {
+            force = true;
+            default = "brave";
+            order = [ "brave" "google" ];
+          };
+    };
   };
   # The home.packages option allows you to install Nix packages into your
   # environment.
