@@ -100,10 +100,26 @@
             "browser.search.defaultenginename" = "brave";
         };
         search = {
-            force = true;
-            default = "brave";
-            order = [ "brave" "google" ];
-          };
+           force = true;
+           default = "brave";
+        
+           engines = {
+        
+             "brave" = {
+               urls = [
+                 {
+                   template = "https://search.brave.com/search?";
+                   params = [
+                     {
+                       name = "q";
+                       value = "{searchTerms}";
+                     }
+                   ];
+                 }
+               ];
+             };
+        }; 
+     };
     };
   };
   # The home.packages option allows you to install Nix packages into your

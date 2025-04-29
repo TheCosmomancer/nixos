@@ -22,6 +22,13 @@ in {
       DontCheckDefaultBrowser = true;
       DisablePocket = true;
       SearchBar = "unified";
+      AutofillCreditCardEnabled = false;
+      DisableBuiltinPDFViewer = true;
+      DisableProfileImport = true;
+      DisableSetDesktopBackground = true;
+      OfferToSaveLogins = false;
+      SkipTermsOfUse = true;
+      
 
       Preferences = {
         # Privacy settings
