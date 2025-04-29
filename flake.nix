@@ -22,7 +22,7 @@
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
-        ./configuration.nix
+        ./hosts/laptop/configuration.nix
         inputs.distro-grub-themes.nixosModules.${"x86_64-linux"}.default
         inputs.home-manager.nixosModules.default
         inputs.sddm-sugar-candy-nix.nixosModules.default

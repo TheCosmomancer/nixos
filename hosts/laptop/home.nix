@@ -33,7 +33,7 @@
     }
   ];
   shellAliases = {
-      update = "sudo nixos-rebuild switch --flake /etc/nixos/hosts/laptop/#cosmomancer";
+      update = "sudo nixos-rebuild switch --flake /etc/nixos/#cosmomancer";
       flakeupdate = "sudo nix flake update";
     };
   initExtra = "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh\ntypeset -g POWERLEVEL9K_INSTANT_PROMPT=off\nfastfetch";
