@@ -1,9 +1,18 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep 5";
-    flake = "/etc/nixos/flake.nix";
+  options = {
+    nh.enable = 
+      lib.mkEnableOption "enables nh"
+  };
+  config = lib.mkIf config.nh.enable {
+      programs.nh = {
+      enable = true;
+      clean= {
+        enable = true;
+        extraArgs = "--keep 5";
+        dates = "weekly";
+      };
+      flake = "/etc/nixos/";
+    };
   };
 }

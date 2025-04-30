@@ -32,10 +32,6 @@
     };
     }
   ];
-  shellAliases = {
-      update = "sudo nixos-rebuild switch --flake /etc/nixos";
-      flakeupdate = "sudo nix flake update";
-    };
   initExtra = "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh\ntypeset -g POWERLEVEL9K_INSTANT_PROMPT=off\nfastfetch";
   };
   services.hyprpaper ={
@@ -81,14 +77,14 @@
             "workbench.preferredHighContrastColorTheme" = "Default Dark Modern";
             "terminal.external.linuxExec" = "ghostty";
         };
+        extensions = with pkgs.vscode-extensions; [
+        bbenoist.nix 
+        ms-python.python 
+        esbenp.prettier-vscode 
+        visualstudioexptteam.vscodeintellicode
+        jgclark.vscode-todo-highlight
+        ];
     };
-    extensions = with pkgs.vscode-extensions; [
-    bbenoist.nix 
-    ms-python.python 
-    esbenp.prettier-vscode 
-    visualstudioexptteam.vscodeintellicode
-    jgclark.vscode-todo-highlight
-    ];
   };
   programs.firefox = {
     enable = true;

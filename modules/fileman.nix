@@ -1,5 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
+  options = {
+    fileman.enable = 
+      lib.mkEnableOption "enables fileman"
+  };
+  config = lib.mkIf config.fileman.enable {
     programs.xfconf.enable = true;
     services.gvfs.enable = true;
     services.tumbler.enable = true;
@@ -11,4 +16,8 @@
         thunar-volman
         ];
     };
+    environment.systemPackages = with pkgs; [
+        ranger
+    ];
+  };
 }
