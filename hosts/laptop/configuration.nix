@@ -24,6 +24,7 @@
     extraGroups = [ "networkmanager" "wheel" "input" ];
     shell = pkgs.zsh;
   };
+  programs.zsh.enable = true;
   users.extraGroups.vboxusers.members = [ "cosmomancer" ];
   security.sudo.extraRules = [
   {

@@ -2,7 +2,7 @@
 {
   options = {
     sddm.enable = 
-      lib.mkEnableOption "enables sddm"
+      lib.mkEnableOption "enables sddm";
   };
   config = lib.mkIf config.sddm.enable {
       services.displayManager.sddm = {

@@ -2,7 +2,7 @@
 {
   options = {
     desktop.enable = 
-      lib.mkEnableOption "enables desktop"
+      lib.mkEnableOption "enables desktop";
   };
   config = lib.mkIf config.desktop.enable {
     environment.systemPackages = with pkgs; [

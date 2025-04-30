@@ -2,7 +2,7 @@
 {
   options = {
     nh.enable = 
-      lib.mkEnableOption "enables nh"
+      lib.mkEnableOption "enables nh";
   };
   config = lib.mkIf config.nh.enable {
       programs.nh = {

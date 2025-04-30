@@ -2,7 +2,7 @@
 {
   options = {
     fun.enable = 
-      lib.mkEnableOption "enables fun"
+      lib.mkEnableOption "enables fun";
   };
   config = lib.mkIf config.fun.enable {
     environment.systemPackages = with pkgs; [
