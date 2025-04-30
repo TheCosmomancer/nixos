@@ -10,5 +10,6 @@
       ./hyprpanel.nix
       ./hyprland.nix
       ./firefox.nix
+      ./nh.nix
     ];
 }

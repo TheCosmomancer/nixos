@@ -6,7 +6,7 @@
     sugarCandyNix = {
       enable = true;
       settings = {
-        Background = /etc/nixos/media/castle.png;
+        Background = /etc/nixos/media/yo.jpg;
         ScreenWidth = 1920;
         ScreenHeight = 1080;
         FormPosition = "left";
