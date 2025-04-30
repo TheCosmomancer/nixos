@@ -2,7 +2,7 @@
 {
   options = {
     fileman.enable = 
-      lib.mkEnableOption "enables fileman"
+      lib.mkEnableOption "enables fileman";
   };
   config = lib.mkIf config.fileman.enable {
     programs.xfconf.enable = true;

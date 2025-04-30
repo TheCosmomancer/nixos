@@ -2,7 +2,7 @@
 {
   options = {
     hypr.enable = 
-      lib.mkEnableOption "enables hypr"
+      lib.mkEnableOption "enables hypr";
   };
   config = lib.mkIf config.hypr.enable {
     programs.hyprland = {
@@ -22,7 +22,7 @@
         hyprpaper
         ghostty
         rofi-wayland
-        hypr-qtutils
+        hyprland-qtutils
         hyprpanel
         grimblast
     ];

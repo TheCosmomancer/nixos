@@ -2,7 +2,7 @@
 {
   options = {
     dev.enable = 
-      lib.mkEnableOption "enables dev"
+      lib.mkEnableOption "enables dev";
   };
   config = lib.mkIf config.dev.enable {
     environment.systemPackages = with pkgs; [

@@ -2,7 +2,7 @@
 {
   options = {
     sysman.enable = 
-      lib.mkEnableOption "enables sysman"
+      lib.mkEnableOption "enables sysman";
   };
   config = lib.mkIf config.sysman.enable {
     networking.networkmanager.enable = true;

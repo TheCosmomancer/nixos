@@ -2,7 +2,7 @@
 {
   options = {
     polkit.enable = 
-      lib.mkEnableOption "enables polkit"
+      lib.mkEnableOption "enables polkit";
   };
   config = lib.mkIf config.polkit.enable {
     environment.systemPackages = with pkgs; [
