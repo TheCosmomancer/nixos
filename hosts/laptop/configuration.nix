@@ -24,7 +24,7 @@
     theme = "nixos";
   };
   
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "laptop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -118,7 +118,6 @@
     git
     gh
     vlc
-    brave
     vscode
     libreoffice
     qalculate-qt
@@ -134,14 +133,11 @@
     ventoy-full-gtk
     obsidian
     python312Full
-    pywal16
-    imagemagick
     ranger
     nekoray
     telegram-desktop
     bitwarden-desktop
     cockatrice
-
     #fun & flair
     fastfetch
     cmatrix
