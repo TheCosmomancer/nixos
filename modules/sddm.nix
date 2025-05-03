@@ -12,7 +12,7 @@
         sugarCandyNix = {
           enable = true;
           settings = {
-            Background = /etc/nixos/media/wallpaperflare.com_wallpaper.jpg;
+            Background = /etc/nixos/media/ramen.jpg;
             ScreenWidth = 1920;
             ScreenHeight = 1080;
             FormPosition = "left";

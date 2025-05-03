@@ -18,6 +18,8 @@
     file-roller
     obsidian
     nekoray
+    amnezia-vpn
+    amneziawg-tools
     telegram-desktop
     bitwarden-desktop
     ];

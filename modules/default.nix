@@ -5,6 +5,7 @@
     ./desktop.nix
     ./dev.nix
     ./fileman.nix
+    ./firefox.nix
     ./fun.nix
     ./hypr.nix
     ./nh.nix
@@ -19,6 +20,7 @@
   desktop.enable = lib.mkDefault true;
   dev.enable = lib.mkDefault true;
   fileman.enable = lib.mkDefault true;
+  firefox.enable = lib.mkDefault true;
   fun.enable = lib.mkDefault true;
   hypr.enable = lib.mkDefault true;
   nh.enable = lib.mkDefault true;
