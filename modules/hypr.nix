@@ -25,6 +25,7 @@
         hyprland-qtutils
         hyprpanel
         grimblast
+        nwg-dock-hyprland
     ];
   };
 }
