@@ -83,6 +83,7 @@
         esbenp.prettier-vscode 
         visualstudioexptteam.vscodeintellicode
         jgclark.vscode-todo-highlight
+        james-yu.latex-workshop
         ];
     };
   };

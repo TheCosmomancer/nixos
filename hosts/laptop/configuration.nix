@@ -11,11 +11,9 @@
 
   networking.hostName = "laptop";
 
-  # Enable touchpad support and disable the lid closure switch for useage 
-  # while connected to a montitor.
+  # Enable touchpad support
   services.libinput.enable = true;
-  services.logind.lidSwitch = "ignore";
-  services.logind.extraConfig = "HandleLidSwitch=ignore";
+  lid.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.cosmomancer = {
