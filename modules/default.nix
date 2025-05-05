@@ -15,6 +15,7 @@
     ./sysman.nix
     ./theme.nix
     ./virtualbox.nix
+    ./lid.nix
   ];
   bootloader.enable = lib.mkDefault true;
   desktop.enable = lib.mkDefault true;
@@ -30,4 +31,5 @@
   sysman.enable = lib.mkDefault true;
   theme.enable = lib.mkDefault true;
   virtualbox.enable = lib.mkDefault true;
+  lid.enable = lib.mkDefault false;
 }

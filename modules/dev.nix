@@ -10,6 +10,7 @@
     gh
     vscode
     python312Full
+    texliveBasic
     ];
   };
 }

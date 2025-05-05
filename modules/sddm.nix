@@ -16,6 +16,11 @@
             ScreenWidth = 1920;
             ScreenHeight = 1080;
             FormPosition = "left";
+            MainColor = "lightgrey";
+            AccentColor = "#276989";
+            #OverrideLoginButtonTextColor = "";
+            HeaderText = "";
+            DateFormat = "dddd, MMMM d, yyyy";
           };
         };
       };
