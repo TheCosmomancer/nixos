@@ -67,21 +67,19 @@
   nixpkgs.config.allowUnfree = true;
   programs.vscode = {
     enable = true;
+    package = pkgs.vscodium;
     profiles.default = {
         enableUpdateCheck = false;
         enableExtensionUpdateCheck = false;
         userSettings = {
-            "telemetry.telemetryLevel" = "off";
             "files.autoSave" = "onFocusChange";
             "editor.formatOnPaste" = true;
-            "workbench.preferredHighContrastColorTheme" = "Default Dark Modern";
-            "terminal.external.linuxExec" = "ghostty";
         };
         extensions = with pkgs.vscode-extensions; [
         bbenoist.nix 
-        ms-python.python 
+        ms-python.python
+        ms-pyright.pyright
         esbenp.prettier-vscode 
-        visualstudioexptteam.vscodeintellicode
         jgclark.vscode-todo-highlight
         james-yu.latex-workshop
         ];
@@ -89,6 +87,7 @@
   };
   programs.firefox = {
     enable = true;
+    package = pkgs.librewolf;
     profiles.default = {
         id = 0;
         name = "default";

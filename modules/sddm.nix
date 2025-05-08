@@ -12,12 +12,12 @@
         sugarCandyNix = {
           enable = true;
           settings = {
-            Background = /etc/nixos/media/ramen.jpg;
+            Background = /etc/nixos/media/cosmicbear.png;
             ScreenWidth = 1920;
             ScreenHeight = 1080;
             FormPosition = "left";
             MainColor = "lightgrey";
-            AccentColor = "#276989";
+            AccentColor = "aquamarine";
             #OverrideLoginButtonTextColor = "";
             HeaderText = "";
             DateFormat = "dddd, MMMM d, yyyy";

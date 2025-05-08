@@ -8,9 +8,9 @@
     environment.systemPackages = with pkgs; [
     git
     gh
-    vscode
+    vscodium
     python312Full
-    texliveBasic
+    texliveMedium
     ];
   };
 }

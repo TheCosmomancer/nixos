@@ -7,6 +7,7 @@
   config = lib.mkIf config.fun.enable {
     environment.systemPackages = with pkgs; [
     cockatrice
+    #shadps4
     ];
   };
 }
