@@ -21,7 +21,7 @@ in
   config = lib.mkIf config.firefox.enable {
     programs.firefox = {
       enable = true;
-
+      package = pkgs.librewolf;
       policies = {
         DisableTelemetry = true;
         DisableFirefoxStudies = true;
