@@ -40,17 +40,20 @@
   home-manager = {
     extraSpecialArgs = {inherit inputs; };
     users = {
-      "cosmomancer" = import [
-        ../../modules/hm/dotfiles.nix
-        ../../modules/hm/firefox.nix
-        ../../modules/hm/hypr.nix
-        ../../modules/hm/theme.nix
-        ../../modules/hm/vsc.nix
-        ../../modules/hm/zsh.nix
-        #../../modules/hm/
-      ];
+      "cosmomancer" ={
+         imports = [
+          ../../modules/hm/dotfiles.nix
+          ../../modules/hm/firefox.nix
+          ../../modules/hm/hypr.nix
+          ../../modules/hm/theme.nix
+          ../../modules/hm/vsc.nix
+          ../../modules/hm/zsh.nix
+          ./home.nix
+          #../../modules/hm/
+        ];
+      };
     };
-
+  useGlobalPkgs = true;
   backupFileExtension = "backup";
   };
   #just don't change this and you'll be fine
