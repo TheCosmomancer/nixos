@@ -5,11 +5,11 @@
   imports =
     [
       ./hardware-configuration.nix
-      ../../modules/default.nix
+      ../../modules/config/default.nix
       inputs.home-manager.nixosModules.default
     ];
 
-  networking.hostName = "laptop";
+  networking.hostName = "pluto";
 
   # Enable touchpad support
   services.libinput.enable = true;
@@ -40,7 +40,15 @@
   home-manager = {
     extraSpecialArgs = {inherit inputs; };
     users = {
-      "cosmomancer" = import ./home.nix;
+      "cosmomancer" = import [
+        ../../modules/hm/dotfiles.nix
+        ../../modules/hm/firefox.nix
+        ../../modules/hm/hypr.nix
+        ../../modules/hm/theme.nix
+        ../../modules/hm/vsc.nix
+        ../../modules/hm/zsh.nix
+        #../../modules/hm/
+      ];
     };
 
   backupFileExtension = "backup";
