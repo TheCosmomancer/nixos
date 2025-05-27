@@ -1,10 +1,11 @@
 { config, pkgs, lib, ... }:
 {
   options = {
-    lid.enable = 
-      lib.mkEnableOption "enables lid";
+    laptop.enable = 
+      laptop.mkEnableOption "enables lid";
   };
-  config = lib.mkIf config.lid.enable {
+  config = laptop.mkIf config.lid.enable {
+    services.libinput.enable = true;
     services.logind.lidSwitch = "ignore";
     services.logind.extraConfig = "HandleLidSwitch=ignore";
   };
