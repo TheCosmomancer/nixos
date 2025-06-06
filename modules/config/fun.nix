@@ -8,6 +8,7 @@
     environment.systemPackages = with pkgs; [
     cockatrice
     mommy
+    lutris
     #shadps4
     ];
   };

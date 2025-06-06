@@ -13,6 +13,8 @@
 
 
   laptop.enable = true;
+  virtualbox.enable = true;
+  fun.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.cosmomancer = {
     isNormalUser = true;
@@ -50,9 +52,9 @@
           ../../modules/hm/dotfiles.nix
           ../../modules/hm/firefox.nix
           ../../modules/hm/hypr.nix
-          ../../modules/hm/theme.nix
           ../../modules/hm/vsc.nix
           ../../modules/hm/zsh.nix
+          # ../../modules/hm/theme.nix
           #../../modules/hm/
         ];
         #just don't change this and you'll be fine

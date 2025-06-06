@@ -28,6 +28,9 @@
         hyprpanel
         eww
         grimblast
+        hyprlock
+        alsa-utils
+        playerctl
     ];
   };
 }

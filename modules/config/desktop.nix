@@ -12,11 +12,11 @@
     obs-studio
     xreader
     nomacs
-    bottles
     peazip
     file-roller
     obsidian
     nekoray
+    persepolis
     telegram-desktop
     bitwarden-desktop
     ];
