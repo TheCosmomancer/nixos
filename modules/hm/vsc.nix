@@ -2,7 +2,7 @@
 {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium;
+    # package = pkgs.vscodium;
     profiles.default = {
         enableUpdateCheck = false;
         enableExtensionUpdateCheck = false;
@@ -10,14 +10,16 @@
             "files.autoSave" = "onFocusChange";
             "editor.formatOnPaste" = true;
             "security.workspace.trust.untrustedFiles" = "open";
+            "telemetry.telemetryLevel" = "off";
         };
         extensions = with pkgs.vscode-extensions; [
-        bbenoist.nix 
+        bbenoist.nix
         ms-python.python
-        ms-pyright.pyright
-        esbenp.prettier-vscode 
+        ms-python.vscode-pylance
+        esbenp.prettier-vscode
         jgclark.vscode-todo-highlight
         james-yu.latex-workshop
+        mkhl.direnv
         ];
     };
   };

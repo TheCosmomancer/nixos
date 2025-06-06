@@ -9,7 +9,7 @@
     services.upower.enable = true;
     services.power-profiles-daemon.enable = true;
     services.thermald.enable = true;
-    services.fail2ban.enable = true;
+    services.gnome.gnome-keyring.enable = true;
     environment.systemPackages = with pkgs; [
       lm_sensors
       btop

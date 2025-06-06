@@ -3,8 +3,8 @@
   services.hyprpaper ={
     enable = true;
     settings = {
-        preload = ["/etc/nixos/media/xenoforest.png"];
-        wallpaper = [",/etc/nixos/media/xenoforest.png"];
+        preload = ["/etc/nixos/media/astronautdesert.png"];
+        wallpaper = [",/etc/nixos/media/astronautdesert.png"];
     }; 
   };
   
@@ -25,6 +25,7 @@
             "systemctl --user start polkit-gnome-authentication-agent-1"
             "hyprctl setcursor Bibata-Modern-Classic 24"
             "hyprpaper"
+            "nm-applet"
             "ulauncher&"
             "ulauncher-toggle"
             "hyprpanel"

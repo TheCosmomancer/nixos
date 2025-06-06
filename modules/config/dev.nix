@@ -8,14 +8,14 @@
     environment.systemPackages = with pkgs; [
     git
     gh
-    vscodium
+    vscode
     vim
-    python312Full
-    texliveMedium
+    python313Full
+    texliveFull
     sqlitebrowser
     proxychains
-    zoxide
     fzf
+    uv
     ];
   };
 }

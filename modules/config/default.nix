@@ -22,7 +22,7 @@
   dev.enable = lib.mkDefault true;
   fileman.enable = lib.mkDefault true;
   firefox.enable = lib.mkDefault true;
-  fun.enable = lib.mkDefault true;
+  fun.enable = lib.mkDefault false;
   hypr.enable = lib.mkDefault true;
   nh.enable = lib.mkDefault true;
   nvidia.enable = lib.mkDefault true;
@@ -30,6 +30,6 @@
   sddm.enable = lib.mkDefault true;
   sysman.enable = lib.mkDefault true;
   theme.enable = lib.mkDefault true;
-  virtualbox.enable = lib.mkDefault true;
+  virtualbox.enable = lib.mkDefault false;
   laptop.enable = lib.mkDefault false;
 }
