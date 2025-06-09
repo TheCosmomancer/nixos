@@ -8,29 +8,8 @@
         name = "default";
         isDefault = true;
         settings = {
-            "browser.search.defaultenginename" = "brave";
+            "browser.search.defaultenginename" = "ddg";
         };
-        search = {
-           force = true;
-           default = "brave";
-        
-           engines = {
-        
-             "brave" = {
-               urls = [
-                 {
-                   template = "https://search.brave.com/search?";
-                   params = [
-                     {
-                       name = "q";
-                       value = "{searchTerms}";
-                     }
-                   ];
-                 }
-               ];
-             };
-        }; 
-     };
     };
   };
 }
