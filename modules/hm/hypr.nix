@@ -30,7 +30,6 @@
             "ulauncher-toggle"
             "hyprpanel"
             "cvlc --aout=alsa --no-interact --random --loop --start-paused /etc/nixos/music"
-            #"nm-applet"
         ];
         env = [
             "XCURSOR_SIZE,24"
@@ -190,6 +189,10 @@
             "stayfocused, class: ulauncher"
             "noblur, class: ulauncher"
             "noborder, class: ulauncher"
+        ];
+        layerrule = [
+            "blur, eww-bar"
+            "xray 1, eww-bar"
         ];
     };
   };

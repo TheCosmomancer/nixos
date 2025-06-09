@@ -13,12 +13,13 @@
     xreader
     nomacs
     peazip
-    file-roller
     obsidian
-    nekoray
+    v2rayn
     persepolis
     telegram-desktop
+    discord
     bitwarden-desktop
     ];
+    services.cloudflare-warp.enable = true;
   };
 }

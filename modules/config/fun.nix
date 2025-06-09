@@ -9,6 +9,10 @@
     cockatrice
     mommy
     lutris
+    bottles
+    wineWowPackages.waylandFull
+    dxvk_2
+    steam
     #shadps4
     ];
   };
