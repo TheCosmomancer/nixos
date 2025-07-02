@@ -20,6 +20,8 @@
         jgclark.vscode-todo-highlight
         james-yu.latex-workshop
         mkhl.direnv
+        rust-lang.rust-analyzer
+        ms-toolsai.jupyter
         ];
     };
   };
