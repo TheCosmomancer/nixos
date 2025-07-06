@@ -3,8 +3,8 @@
   services.hyprpaper ={
     enable = true;
     settings = {
-        preload = ["/etc/nixos/media/astronautdesert.png"];
-        wallpaper = [",/etc/nixos/media/astronautdesert.png"];
+        preload = ["/etc/nixos/media/wizardvillage.png"];
+        wallpaper = [",/etc/nixos/media/wizardvillage.png"];
     }; 
   };
   

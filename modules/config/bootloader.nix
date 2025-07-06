@@ -17,7 +17,7 @@
         };
     distro-grub-themes = {
         enable = true;
-        theme = "nixos";
+        theme = "hp-victus";
     };
   };
 }

@@ -16,6 +16,7 @@
     ./theme.nix
     ./virtualbox.nix
     ./laptop.nix
+    ./plymouth.nix
   ];
   bootloader.enable = lib.mkDefault true;
   desktop.enable = lib.mkDefault true;
@@ -32,4 +33,5 @@
   theme.enable = lib.mkDefault true;
   virtualbox.enable = lib.mkDefault false;
   laptop.enable = lib.mkDefault false;
+  plymouth.enable = lib.mkDefault true;
 }

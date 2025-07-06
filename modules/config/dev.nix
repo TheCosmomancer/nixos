@@ -12,6 +12,7 @@
     pkgs.vim
     (pkgs.python312Full.withPackages(pypkgs: [
     pypkgs.peewee
+    pypkgs.tkinter
     pypkgs.pygame
     pypkgs.numpy
     pypkgs.pandas
