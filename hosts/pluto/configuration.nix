@@ -14,6 +14,9 @@
 
   laptop.enable = true;
   nvidia.enable = true;
+  theme.enable = true;
+  fun.enable = true;
+  hypr.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.cosmomancer = {
     isNormalUser = true;

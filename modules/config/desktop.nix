@@ -25,7 +25,24 @@
     rustdesk
     nwg-look
     ghostty
+    #CLI TOOLS
+    difftastic
+    tlrc
+    jq
+    fzf
+    fd
+    playerctl
+    mpc
+    lm_sensors
+    btop
+    networkmanagerapplet
+    brightnessctl
+    # bluez
     ];
+    services.cloudflare-warp.enable = true;
+    programs.yazi = {
+      enable =true;
+    };
     programs.xfconf.enable = true;
     services.gvfs.enable = true;
     services.tumbler.enable = true;
@@ -76,164 +93,6 @@
           };
         };
       };
-    };
-
-
-
-
-    #CLI TOOLS
-    environment.systemPackages = with pkgs; [
-    difftastic
-    tlrc
-    lazygit
-    jq
-    fzf
-    fd
-    playerctl
-    mpc
-    ];
-    services.cloudflare-warp.enable = true;
-    programs.yazi = {
-      enable =true;
-    };
-
-
-    #FUN
-    environment.systemPackages = with pkgs; [
-    cockatrice
-    lutris
-    wineWowPackages.waylandFull
-    dxvk_2
-    steam
-    mommy
-    cmatrix
-    cbonsai
-    fastfetch
-    neo
-    #shadps4
-    ];
-
-
-    #THEMES
-    environment.systemPackages = with pkgs; [
-    bibata-cursors
-    libsForQt5.qtstyleplugin-kvantum
-    kdePackages.qtstyleplugin-kvantum
-    gruvbox-kvantum
-    rose-pine-kvantum
-    gruvbox-gtk-theme
-    gruvbox-plus-icons
-    ];
-    environment.sessionVariables = {
-      QT_STYLE_OVERRIDE = "kvantum";
-    };
-    boot.loader = {
-            systemd-boot.enable = false;
-            efi.canTouchEfiVariables = true;
-            grub = {
-                efiSupport = true;
-                enable = true;
-                useOSProber = true;
-                device = "nodev";
-            };
-        };
-    distro-grub-themes = {
-        enable = true;
-        theme = "hp-victus";
-    };
-    boot = {
-            plymouth = {
-                enable = true;
-                theme = "owl";
-                themePackages = with pkgs; [
-                    # By default we would install all themes
-                    (adi1090x-plymouth-themes.override {
-                    selected_themes = [ "owl" ];
-                    })
-                ];
-            };
-
-            # Enable "Silent boot"
-            consoleLogLevel = 3;
-            initrd.verbose = false;
-            kernelParams = [
-                "quiet"
-                "splash"
-                "boot.shell_on_fail"
-                "udev.log_priority=3"
-                "rd.systemd.show_status=auto"
-            ];
-            # Hide the OS choice for bootloaders.
-            # It's still possible to open the bootloader list by pressing any key
-            # It will just not appear on screen unless a key is pressed
-            loader.timeout = 5;
-        };
-      services.displayManager = {
-      autoLogin = {
-        enable = true;
-        user = "cosmomancer";
-      };
-      sddm = {
-        enable = true;
-        package = pkgs.libsForQt5.sddm;
-        wayland.enable = true;
-        autoNumlock = true;
-        autoLogin.relogin = true;
-        # sugarCandyNix = {
-        #   enable = true;
-        #   settings = {
-        #     Background = /etc/nixos/media/astronautgarden.png;
-        #     ScreenWidth = 1920;
-        #     ScreenHeight = 1080;
-        #     FormPosition = "left";
-        #     MainColor = "white";
-        #     AccentColor = "black";
-        #     # OverrideLoginButtonTextColor = "";
-        #     HeaderText = "";
-        #     DateFormat = "dddd, MMMM d, yyyy";
-        #   };
-        # };
-      };
-    };
-    
-
-
-    #SYSTEM
-    environment.systemPackages = with pkgs; [
-    lm_sensors
-    btop
-    networkmanagerapplet
-    brightnessctl
-    # bluez
-    ];
-    networking.networkmanager.enable = true;
-    services.upower.enable = true;
-    services.power-profiles-daemon.enable = true;
-    services.thermald.enable = true;
-    time.timeZone = "Asia/Tehran";
-    i18n.defaultLocale = "en_US.UTF-8";
-    services.printing.enable = true;
-    services.pulseaudio.enable = false;
-    security.rtkit.enable = true;
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = false;
-      # use the example session manager (no others are packaged yet so this is enabled by default,no need to redefine it in your config for now)
-      #media-session.enable = true;
-    };
-    nixpkgs.config.allowUnfree = true;
-    nix.settings.experimental-features = ["nix-command" "flakes"];
-    programs.nh = {
-      enable = true;
-      clean= {
-        enable = true;
-        extraArgs = "--keep 5";
-        dates = "weekly";
-      };
-      flake = "/etc/nixos/";
     };
   };
 }

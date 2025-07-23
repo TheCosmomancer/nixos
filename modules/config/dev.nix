@@ -10,6 +10,7 @@
     };
     environment.systemPackages = with pkgs;[
     git
+    lazygit
     gh
     vscode
     (python312Full.withPackages(pypkgs: with pypkgs;[
