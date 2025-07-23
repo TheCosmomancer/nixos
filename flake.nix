@@ -20,7 +20,7 @@
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
-        ./hosts/laptop/configuration.nix
+        ./hosts/pluto/configuration.nix
         inputs.distro-grub-themes.nixosModules.${"x86_64-linux"}.default
         inputs.home-manager.nixosModules.default
         inputs.sddm-sugar-candy-nix.nixosModules.default
