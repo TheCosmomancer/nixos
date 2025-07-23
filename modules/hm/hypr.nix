@@ -3,8 +3,8 @@
   services.hyprpaper ={
     enable = true;
     settings = {
-        preload = ["/etc/nixos/media/wizardvillage.png"];
-        wallpaper = [",/etc/nixos/media/wizardvillage.png"];
+        preload = ["/etc/nixos/media/wallhaven-k7lr31_2560x1440.png"];
+        wallpaper = [",/etc/nixos/media/wallhaven-k7lr31_2560x1440.png"];
     }; 
   };
   
@@ -18,18 +18,16 @@
         "$mainMod" = "SUPER";
         "$terminal" = "ghostty";
         "$fileManager" = "thunar";
-        "$menu" = "ulauncher-toggle";
-        "$screenshot" = "grimblast --notify --freeze save area ~/grimblast/screenshot.png";
+        "$menu" = "rofi -show drun";
+        "$screenshot" = "hyprshot -o ~/hyprshot -z -m region";
         exec-once = [
             "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
             "systemctl --user start polkit-gnome-authentication-agent-1"
             "hyprctl setcursor Bibata-Modern-Classic 24"
-            "hyprpaper"
+            "eww open bar"
             "nm-applet"
-            "ulauncher&"
-            "ulauncher-toggle"
-            "hyprpanel"
-            "cvlc --aout=alsa --no-interact --random --loop --start-paused /etc/nixos/music"
+            # "mpc"
+            "hyprpaper & hyprlock"
         ];
         env = [
             "XCURSOR_SIZE,24"
@@ -42,7 +40,7 @@
         general = {
             gaps_in = 3;
             gaps_out = 15;
-            border_size = 1;
+            border_size = 0;
             "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
             "col.inactive_border" = "rgba(595959aa)";
             layout = "dwindle";
@@ -186,9 +184,6 @@
             # Fix some dragging issues with XWayland
             "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
             "stayfocused, title:Authenticate"
-            "stayfocused, class: ulauncher"
-            "noblur, class: ulauncher"
-            "noborder, class: ulauncher"
         ];
         layerrule = [
             "blur, eww-bar"
