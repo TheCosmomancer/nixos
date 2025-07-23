@@ -11,6 +11,7 @@
             "editor.formatOnPaste" = true;
             "security.workspace.trust.untrustedFiles" = "open";
             "telemetry.telemetryLevel" = "off";
+            "workbench.colorTheme" = "Gruvbox Dark Hard";
         };
         extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
@@ -22,6 +23,7 @@
         mkhl.direnv
         rust-lang.rust-analyzer
         ms-toolsai.jupyter
+        jdinhlife.gruvbox
         ];
     };
   };
