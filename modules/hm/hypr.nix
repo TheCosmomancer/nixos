@@ -3,8 +3,8 @@
   services.hyprpaper ={
     enable = true;
     settings = {
-        preload = ["/etc/nixos/media/wallhaven-k7lr31_2560x1440.png"];
-        wallpaper = [",/etc/nixos/media/wallhaven-k7lr31_2560x1440.png"];
+        preload = ["/etc/nixos/media/nightcabingirl.png"];
+        wallpaper = [",/etc/nixos/media/nightcabingirl.png"];
     }; 
   };
   
@@ -20,6 +20,10 @@
         "$fileManager" = "thunar";
         "$menu" = "rofi -show drun";
         "$screenshot" = "hyprshot -o ~/hyprshot -z -m region";
+        "$browser" = "librewolf";
+        "$editor" = "code";
+        "$obsidian" = "obsidian";
+        "$sysvital" = "missioncenter";
         exec-once = [
             "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
             "systemctl --user start polkit-gnome-authentication-agent-1"
@@ -27,7 +31,8 @@
             "eww open bar"
             "nm-applet"
             # "mpc"
-            "hyprpaper & hyprlock"
+            "hyprpaper"
+            "~/BehrazWebUI/ai_panel.py"
         ];
         env = [
             "XCURSOR_SIZE,24"
@@ -116,10 +121,15 @@
             "$mainMod, Q, exec, $terminal"
             "$mainMod, A, exec, $menu"
             "$mainMod, E, exec, $fileManager"
-            "$mainMod, S, exec, $screenshot"
+            "$mainMod, P, exec, $screenshot"
+            "$mainMod, D, exec, $browser"
+            "$mainMod, X, exec, $editor"
+            "$mainMod, O, exec, $obsidian"
+            "$mainMod, Escape, exec, $sysvital"
             "$mainMod, C, killactive,"
             "$mainMod, M, exit,"
             "$mainMod, V, togglefloating,"
+            "$mainMod, T, exec, pkill -SIGUSR1 -f ai_panel.py"
 
             # Move focus with mainMod + arrow keys
             "$mainMod, left, movefocus, l"

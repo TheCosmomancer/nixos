@@ -16,9 +16,31 @@
     hide_cursor = true
     ignore_empty_input = true
     }
-    background{
-    monitor = 
-    path = /etc/nixos/media/wizardvillage.png
+    background {
+        monitor =
+        path = screenshot
+        blur_passes = 1
+        blur_size = 4
+        brightness = 0.9
+        contrast = 0.9
+    }
+
+    input-field {
+        monitor =
+        size = 200, 60
+        outline_thickness = 0
+        dots_size = 0.25
+        dots_spacing = 0.35
+        dots_center = true
+        outer_color = rgba(0, 0, 0, 0.5)
+        inner_color = rgba(255, 255, 255, 0.1)
+        font_color = rgba(255, 255, 255,0.5)
+        fade_on_empty = true
+        placeholder_text = 
+        hide_input = false
+        position = 0, -200
+        halign = center
+        valign = center
     }
     '';
     ".config/rofi/config.rasi".text = ''
