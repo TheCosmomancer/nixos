@@ -11,7 +11,7 @@
     sddm-sugar-candy-nix = {
     url = "gitlab:Zhaith-Izaliel/sddm-sugar-candy-nix";
     inputs.nixpkgs.follows = "nixpkgs";
-  };
+    };
     distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
   };
 

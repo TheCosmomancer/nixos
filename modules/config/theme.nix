@@ -29,16 +29,16 @@
         };
     distro-grub-themes = {
         enable = true;
-        theme = "hp-victus";
+        theme = "nixos";
     };
     boot = {
             plymouth = {
                 enable = true;
-                theme = "owl";
+                theme = "deus_ex";
                 themePackages = with pkgs; [
                     # By default we would install all themes
                     (adi1090x-plymouth-themes.override {
-                    selected_themes = [ "owl" ];
+                    selected_themes = [ "deus_ex" ];
                     })
                 ];
             };
@@ -58,32 +58,53 @@
             # It will just not appear on screen unless a key is pressed
             loader.timeout = 5;
         };
+      # services.desktopManager.cosmic.enable = true;
       services.displayManager = {
-      autoLogin = {
-        enable = true;
-        user = "cosmomancer";
-      };
+        # cosmic-greeter.enable = true;
+      # autoLogin = {
+      #   enable = true;
+      #   user = "cosmomancer";
+      # };
       sddm = {
         enable = true;
         package = pkgs.libsForQt5.sddm;
         wayland.enable = true;
         autoNumlock = true;
-        autoLogin.relogin = true;
-        # sugarCandyNix = {
-        #   enable = true;
-        #   settings = {
-        #     Background = /etc/nixos/media/astronautgarden.png;
-        #     ScreenWidth = 1920;
-        #     ScreenHeight = 1080;
-        #     FormPosition = "left";
-        #     MainColor = "white";
-        #     AccentColor = "black";
-        #     # OverrideLoginButtonTextColor = "";
-        #     HeaderText = "";
-        #     DateFormat = "dddd, MMMM d, yyyy";
-        #   };
-        # };
+        # autoLogin.relogin = true;
+        sugarCandyNix = {
+          enable = true;
+          settings = {
+            Background = /etc/nixos/media/wallhaven-qzv3kl_2560x1440.png;
+            ScreenWidth = 1920;
+            ScreenHeight = 1080;
+            FormPosition = "left";
+            MainColor = "white";
+            AccentColor = "black";
+            # OverrideLoginButtonTextColor = "";
+            HeaderText = "";
+            DateFormat = "dddd, MMMM d, yyyy";
+          };
+        };
       };
+    };
+    fonts = {
+      packages = with pkgs; [
+        dejavu_fonts
+        nerd-fonts.jetbrains-mono
+        beedii
+        noto-fonts-monochrome-emoji
+      ];
+      fontconfig = {
+        enable = true;
+        defaultFonts = {
+          serif = [ "DejaVu Serif" ];
+          sansSerif = [ "DejaVu Sans" ];
+          monospace = [ "JetBrains Mono Nerd Font" ];
+          emoji = [ "Beedii" "Noto Emoji" ];
+        };
+      };
+      # Enable font discovery for applications
+      fontDir.enable = true;
     };
   };
 }

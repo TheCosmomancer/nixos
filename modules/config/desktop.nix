@@ -7,14 +7,15 @@
   config = lib.mkIf config.desktop.enable {
     #DESKTOP APPS
     environment.systemPackages = with pkgs; [
-    vlc
+    celluloid
     libreoffice
+    brave
     gimp-with-plugins
     inkscape-with-extensions
     obs-studio
     xreader
     nomacs
-    peazip
+    xarchiver
     obsidian
     telegram-desktop
     discord
@@ -25,26 +26,59 @@
     rustdesk
     nwg-look
     ghostty
+    virt-manager
+    mission-center
+    # protonvpn-gui
+    # v2ray
+    # nekoray
+    # v2rayn
+    # hiddify-app
+    libsForQt5.kdenlive
+    shotcut
     #CLI TOOLS
-    difftastic
+    difftastic/*  */
     tlrc
     jq
+    ijq
     fzf
     fd
     playerctl
     mpc
+    up
+    eza
     lm_sensors
     btop
     networkmanagerapplet
     brightnessctl
+    fastfetch
+    jp2a
+    browsh
+    bat
+    ripgrep
+    alsa-utils
     # bluez
     ];
+    programs.nekoray = {
+      enable = true;
+      tunMode.enable = true;
+      tunMode.setuid = false;
+    };
+    # services.v2raya.enable = true;
+    # systemd.services.v2raya.serviceConfig = {
+    #   AmbientCapabilities = [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
+    #   CapabilityBoundingSet = [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
+    # };
+    # boot.kernel.sysctl = {
+    #   "net.ipv4.ip_forward" = 1;
+    #   "net.ipv6.conf.all.fowrading" = 1;
+    # };
     services.cloudflare-warp.enable = true;
     programs.yazi = {
       enable =true;
     };
     programs.xfconf.enable = true;
     services.gvfs.enable = true;
+    services.udisks2.enable = true;
     services.tumbler.enable = true;
     programs.thunar = {
         enable = true;

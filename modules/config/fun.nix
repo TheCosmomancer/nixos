@@ -14,9 +14,14 @@
         mommy
         cmatrix
         cbonsai
-        fastfetch
+        rust-stakeholder
+        hollywood
+        genact
         neo
+        lolcat
+        cowsay
         #shadps4
         ];
+        
   };
 }

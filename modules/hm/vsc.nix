@@ -12,6 +12,8 @@
             "security.workspace.trust.untrustedFiles" = "open";
             "telemetry.telemetryLevel" = "off";
             "workbench.colorTheme" = "Gruvbox Dark Hard";
+            "editor.fontFamily" = "'JetBrains Mono Nerd Font'";
+            "python.analysis.typeCheckingMode" =  "standard";
         };
         extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
@@ -24,6 +26,7 @@
         rust-lang.rust-analyzer
         ms-toolsai.jupyter
         jdinhlife.gruvbox
+        charliermarsh.ruff
         ];
     };
   };
