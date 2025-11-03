@@ -58,11 +58,6 @@
             # It will just not appear on screen unless a key is pressed
             loader.timeout = 5;
         };
-      # services.desktopManager.cosmic.enable = true;
-      services.desktopManager.cosmic = {
-        enable = true;
-        xwayland.enable = true;
-      };
       # environment.cosmic.excludePackages = [];
       services.displayManager = {
         cosmic-greeter.enable = true;

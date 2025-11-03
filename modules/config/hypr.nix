@@ -9,6 +9,10 @@
       enable = true;
       xwayland.enable = true;
     };
+    services.desktopManager.cosmic = {
+      enable = true;
+      xwayland.enable = true;
+    };
     environment.sessionVariables ={
       WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";
@@ -29,6 +33,7 @@
     cosmic-launcher
     hyprshot
     polkit_gnome
+    networkmanagerapplet
     #hyprpolkitagent
     # hyprpanel
     # alsa-utils

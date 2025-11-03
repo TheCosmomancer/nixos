@@ -15,28 +15,23 @@
     obs-studio
     xreader
     nomacs
-    xarchiver
     obsidian
     telegram-desktop
     discord
     bitwarden-desktop
-    gparted
     gnome-font-viewer
-    sublime-merge
     rustdesk
     nwg-look
     ghostty
     virt-manager
     mission-center
-    kdePackages.kdenlive
     shotcut
     audio-recorder
     localsend
-    kdePackages.kdeconnect-kde
     copyq
     geeqie
+    rink
     #CLI TOOLS
-    difftastic
     p7zip
     wget
     tlrc
@@ -45,17 +40,13 @@
     fzf
     fd
     playerctl
-    mpc
-    up
     eza
     lm_sensors
     btop
-    networkmanagerapplet
     brightnessctl
     fastfetch
     clock-rs
     jp2a
-    browsh
     bat
     ripgrep
     alsa-utils

@@ -7,7 +7,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
+    distro-grub-themes= {
+      url = "github:AdisonCavani/distro-grub-themes";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nputs.nixvim = {
+    url = "github:nix-community/nixvim";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
@@ -18,6 +25,7 @@
         ./hosts/pluto/configuration.nix
         inputs.distro-grub-themes.nixosModules.${"x86_64-linux"}.default
         inputs.home-manager.nixosModules.default
+        inputs.nixvim.nixosModules.nixvim
       ];
     };
   };
