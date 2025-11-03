@@ -7,10 +7,10 @@
   config = lib.mkIf config.fun.enable {
     environment.systemPackages = with pkgs; [
         cockatrice
-        lutris
         wineWowPackages.waylandFull
         dxvk_2
         steam
+        lutris
         mommy
         cmatrix
         cbonsai

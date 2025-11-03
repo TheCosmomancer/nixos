@@ -27,6 +27,7 @@
         ms-toolsai.jupyter
         jdinhlife.gruvbox
         charliermarsh.ruff
+        supermaven.supermaven
         ];
     };
   };

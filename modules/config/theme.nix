@@ -59,33 +59,23 @@
             loader.timeout = 5;
         };
       # services.desktopManager.cosmic.enable = true;
+      services.desktopManager.cosmic = {
+        enable = true;
+        xwayland.enable = true;
+      };
+      # environment.cosmic.excludePackages = [];
       services.displayManager = {
-        # cosmic-greeter.enable = true;
+        cosmic-greeter.enable = true;
       # autoLogin = {
       #   enable = true;
       #   user = "cosmomancer";
       # };
-      sddm = {
-        enable = true;
-        package = pkgs.libsForQt5.sddm;
-        wayland.enable = true;
-        autoNumlock = true;
-        # autoLogin.relogin = true;
-        sugarCandyNix = {
-          enable = true;
-          settings = {
-            Background = /etc/nixos/media/wallhaven-qzv3kl_2560x1440.png;
-            ScreenWidth = 1920;
-            ScreenHeight = 1080;
-            FormPosition = "left";
-            MainColor = "white";
-            AccentColor = "black";
-            # OverrideLoginButtonTextColor = "";
-            HeaderText = "";
-            DateFormat = "dddd, MMMM d, yyyy";
-          };
-        };
-      };
+      # sddm = {
+      #   enable = true;
+      #   wayland.enable = true;
+      #   autoNumlock = true;
+      #   # autoLogin.relogin = true;
+      # };
     };
     fonts = {
       packages = with pkgs; [
@@ -93,6 +83,8 @@
         nerd-fonts.jetbrains-mono
         beedii
         noto-fonts-monochrome-emoji
+        vazir-fonts
+        shabnam-fonts
       ];
       fontconfig = {
         enable = true;
@@ -100,7 +92,8 @@
           serif = [ "DejaVu Serif" ];
           sansSerif = [ "DejaVu Sans" ];
           monospace = [ "JetBrains Mono Nerd Font" ];
-          emoji = [ "Beedii" "Noto Emoji" ];
+          emoji = [ "Noto Emoji" ];
+          # emoji = [ "Beedii" "Noto Emoji" ];
         };
       };
       # Enable font discovery for applications

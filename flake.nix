@@ -7,11 +7,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
-    sddm-sugar-candy-nix = {
-    url = "gitlab:Zhaith-Izaliel/sddm-sugar-candy-nix";
-    inputs.nixpkgs.follows = "nixpkgs";
-    };
     distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
   };
 
@@ -23,13 +18,6 @@
         ./hosts/pluto/configuration.nix
         inputs.distro-grub-themes.nixosModules.${"x86_64-linux"}.default
         inputs.home-manager.nixosModules.default
-        inputs.sddm-sugar-candy-nix.nixosModules.default
-        {
-          nixpkgs.overlays = [
-            inputs.hyprpanel.overlay
-            inputs.sddm-sugar-candy-nix.overlays.default
-            ];
-        }
       ];
     };
   };

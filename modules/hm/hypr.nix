@@ -9,7 +9,6 @@
   };
   
   wayland.windowManager.hyprland = {
-    enable = true;
     settings = {
         monitor = [
             "eDP-1, 1920x1080@60, 0x0, 1"
@@ -130,6 +129,7 @@
             "$mainMod, M, exit,"
             "$mainMod, V, togglefloating,"
             "$mainMod, T, exec, pkill -SIGUSR1 -f ai_panel.py"
+            "ALT, TAB, workspace, previous"
 
             # Move focus with mainMod + arrow keys
             "$mainMod, left, movefocus, l"
