@@ -20,10 +20,17 @@
   users.users.cosmomancer = {
     isNormalUser = true;
     description = "cosmomancer";
-    extraGroups = [ "networkmanager" "wheel" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "libvirtd"];
     shell = pkgs.fish;
   };
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      mkcd = "mkdir -p \"$1\" && cd \"$1\"";
+      ls = "eza --git -F --color-scale --icons --group-directories-first";
+      lsa = "eza --git -F -a --color-scale --icons --group-directories-first";
+    };
+  };
   security.sudo.extraRules = [{
     users = [ "cosmomancer" ];
     commands = [

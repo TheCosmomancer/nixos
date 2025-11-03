@@ -40,6 +40,8 @@
     faster-whisper
     pyaudio
     ]))
+    ruff
+    python312Packages.xonsh
     gcc
     pkg-config
     portaudio
@@ -55,6 +57,15 @@
     typst
     typstwriter
     dbgate
+    virt-manager
     ];
+    programs.nixvim = {
+    enable = true;
+    };
+    virtualisation = {
+      libvirtd.enable = true;
+      # spiceUSBRedirection.enable = true;
+      # qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+    };
   };
 }
