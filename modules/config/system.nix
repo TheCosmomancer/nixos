@@ -14,6 +14,9 @@
     services.printing.enable = true;
     services.pulseaudio.enable = false;
     security.rtkit.enable = true;
+    environment.systemPackages = with pkgs;[
+      bash
+    ];
     services.pipewire = {
       enable = true;
       alsa.enable = true;

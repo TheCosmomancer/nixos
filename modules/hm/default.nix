@@ -4,6 +4,6 @@
         ./dotfiles.nix
         ./hypr.nix
         ./vsc.nix
-        ./zsh.nix
+        # ./zsh.nix
     ];
 }

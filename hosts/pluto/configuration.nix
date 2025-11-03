@@ -1,7 +1,6 @@
 { config, pkgs, inputs, ... }:
 
 {
-  #nerd-fonts.jetbrains-mono MAKE SURE to manually install
   imports =
     [
       ./hardware-configuration.nix
@@ -22,9 +21,9 @@
     isNormalUser = true;
     description = "cosmomancer";
     extraGroups = [ "networkmanager" "wheel" "input" ];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
-  programs.zsh.enable = true;
+  programs.fish.enable = true;
   security.sudo.extraRules = [{
     users = [ "cosmomancer" ];
     commands = [

@@ -22,11 +22,11 @@
     libnotify
     dunst
     wired
-    hyprpaper
     hyprland-qtutils
     eww
     hyprlock
-    rofi-wayland
+    rofi
+    cosmic-launcher
     hyprshot
     polkit_gnome
     #hyprpolkitagent

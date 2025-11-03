@@ -6,7 +6,8 @@
   };
   config = lib.mkIf config.laptop.enable {
     services.libinput.enable = true;
-    services.logind.lidSwitch = "ignore";
-    services.logind.extraConfig = "HandleLidSwitch=ignore";
+    services.logind.settings.Login = {
+      HandleLidSwitch = "ignore";
+    };
   };
 }

@@ -7,7 +7,7 @@
   config = lib.mkIf config.desktop.enable {
     #DESKTOP APPS
     environment.systemPackages = with pkgs; [
-    celluloid
+    vlc
     libreoffice
     brave
     gimp-with-plugins
@@ -28,15 +28,17 @@
     ghostty
     virt-manager
     mission-center
-    # protonvpn-gui
-    # v2ray
-    # nekoray
-    # v2rayn
-    # hiddify-app
-    libsForQt5.kdenlive
+    kdePackages.kdenlive
     shotcut
+    audio-recorder
+    localsend
+    kdePackages.kdeconnect-kde
+    copyq
+    geeqie
     #CLI TOOLS
-    difftastic/*  */
+    difftastic
+    p7zip
+    wget
     tlrc
     jq
     ijq
@@ -51,6 +53,7 @@
     networkmanagerapplet
     brightnessctl
     fastfetch
+    clock-rs
     jp2a
     browsh
     bat
@@ -58,20 +61,23 @@
     alsa-utils
     # bluez
     ];
+    programs.zoxide = {
+      enable = true;
+      enableFishIntegration = true;
+      # enableZshIntegration = true;
+    };
+    programs.direnv = {
+      enable = true;
+      enableFishIntegration = true;
+      # enableZshIntegration = true;
+    };
+    services.lorri.enable = true;
+    
     programs.nekoray = {
       enable = true;
       tunMode.enable = true;
       tunMode.setuid = false;
     };
-    # services.v2raya.enable = true;
-    # systemd.services.v2raya.serviceConfig = {
-    #   AmbientCapabilities = [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
-    #   CapabilityBoundingSet = [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
-    # };
-    # boot.kernel.sysctl = {
-    #   "net.ipv4.ip_forward" = 1;
-    #   "net.ipv6.conf.all.fowrading" = 1;
-    # };
     services.cloudflare-warp.enable = true;
     programs.yazi = {
       enable =true;
@@ -90,7 +96,6 @@
     };
     programs.firefox = {
       enable = true;
-      package = pkgs.librewolf;
       policies = {
         DontCheckDefaultBrowser = true;
         DisablePocket = true;
