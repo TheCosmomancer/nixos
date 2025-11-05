@@ -10,8 +10,8 @@
       cores = 2;
       keep-going = false;
     };
-    environment.sessionVariables = {
-      LD_LIBRARY_PATH = ["${pkgs.gcc.cc.lib}/lib"];};
+    # environment.sessionVariables = {
+    #   LD_LIBRARY_PATH = ["${pkgs.gcc.cc.lib}/lib"];};
     environment.systemPackages = with pkgs;[
     git
     lazygit
