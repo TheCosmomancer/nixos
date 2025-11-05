@@ -31,6 +31,7 @@
     copyq
     geeqie
     rink
+    librewolf
     #CLI TOOLS
     p7zip
     wget
