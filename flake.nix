@@ -15,7 +15,10 @@
     url = "github:nix-community/nixvim";
     inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      };
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
@@ -27,7 +30,7 @@
         inputs.distro-grub-themes.nixosModules.${"x86_64-linux"}.default
         inputs.home-manager.nixosModules.default
         inputs.nixvim.nixosModules.nixvim
-        inputs.hyprland.nixosModules.default
+        inputs.stylix.nixosModules.stylix
       ];
     };
   };

@@ -56,7 +56,6 @@
     # texliveFull
     # pandoc
     typst
-    typstwriter
     dbgate
     virt-manager
     ];

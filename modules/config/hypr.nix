@@ -8,8 +8,10 @@
     programs.hyprland = {
       enable = true;
       xwayland.enable = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      };
+    services.displayManager.gdm = {
+      enable = true;
+      wayland = true;
     };
     environment.sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = "1";
@@ -24,7 +26,6 @@
       eww
       hyprlock
       rofi
-      cosmic-launcher
       hyprshot
       polkit_gnome
       networkmanagerapplet

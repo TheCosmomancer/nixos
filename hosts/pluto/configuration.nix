@@ -9,14 +9,7 @@
     ];
 
   networking.hostName = "pluto";
-
-
-  laptop.enable = true;
-  nvidia.enable = true;
-  theme.enable = true;
-  fun.enable = true;
-  hypr.enable = true;
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  
   users.users.cosmomancer = {
     isNormalUser = true;
     description = "cosmomancer";
@@ -54,7 +47,7 @@
         nixpkgs.config.allowUnfree = true;
         # Let Home Manager install and manage itself.
         programs.home-manager.enable = true;
-        imports = [../../modules/hm];
+        imports = [./home.nix];
         #just don't change this and you'll be fine
         home.stateVersion = "24.11";
       };

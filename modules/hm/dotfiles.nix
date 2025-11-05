@@ -46,231 +46,169 @@
     ".config/rofi/config.rasi".text = ''
     configuration {
         show-icons: true;
-        font: "JetBrains Mono 12";
-
-        display-ssh:    "󰣀 ssh:";
-        display-run:    "󱓞 run:";
         display-drun:   "󰣖 drun:";
-        display-window: "󱂬 window:";
-        display-combi:  "󰕘 combi:";
-        display-filebrowser: "󰉋 filebrowser:";
-
         dpi: 120;
     }
 
-    @theme "gruvbox-material"
+    @theme "cooltheme"
     '';
-    ".config/rofi/themes/gruvbox-material.rasi".text = ''
+    ".config/rofi/themes/cooltheme.rasi".text = ''
+    /*****----- Configuration -----*****/
+    configuration {
+        modi:                       "drun";
+        show-icons:                 true;
+        display-drun:               "";
+        drun-display-format:        "{name}";
+    }
+
+    /*****----- Global Properties -----*****/
     * {
-        bg0: #282828;
-        bg1: #32302f;
-        grey0: #7c6f64;
-        fg0: #d4be98;
-
-        blue: #7daea3;
-        red: #ea6962;
-        orange: #e78a4e;
-        green: #a9b665;
-        bgStatusline3: #504945;
-
-        background-color: @bg0;
+        font:                        "JetBrains Mono Nerd Font 10";
+        background:                  #231419;
+        background-alt:              #2D1E23;
+        foreground:                  #FFFFFF;
+        selected:                    #426647;
+        active:                      #2E3F34;
+        urgent:                      #D08261;
     }
 
+    /*****----- Main Window -----*****/
     window {
-        height: 600;
-        width: 600;
+        /* properties for window widget */
+        transparency:                "real";
+        location:                    center;
+        anchor:                      center;
+        fullscreen:                  false;
+        width:                       600px;
+        x-offset:                    0px;
+        y-offset:                    0px;
 
-        border: 1;
-        border-radius: 10;
-        border-color: @bgStatusline3;
+        /* properties for all widgets */
+        enabled:                     true;
+        border-radius:               20px;
+        cursor:                      "default";
+        background-color:            @background;
     }
 
+    /*****----- Main Box -----*****/
     mainbox {
-        spacing: 0;
-        children: [inputbar, message, listview];
+        enabled:                     true;
+        spacing:                     0px;
+        background-color:            transparent;
+        orientation:                 vertical;
+        children:                    [ "inputbar", "listbox" ];
     }
 
+    listbox {
+        spacing:                     20px;
+        padding:                     20px;
+        background-color:            transparent;
+        orientation:                 vertical;
+        children:                    [ "message", "listview" ];
+    }
+
+    /*****----- Inputbar -----*****/
     inputbar {
-        color: @fg0;
-        padding: 14;
-        background-color: @bg0;
+        enabled:                     true;
+        spacing:                     10px;
+        padding:                     80px 60px;
+        background-color:            transparent;
+        background-image:            url("/etc/nixos/media/nightcabingirlrofi.png", width);
+        text-color:                  @foreground;
+        orientation:                 horizontal;
+        children:                    [ "textbox-prompt-colon", "entry", "dummy" ];
     }
-
-    message {
-        padding: 10;
-        background-color: @grey0;
+    textbox-prompt-colon {
+        enabled:                     true;
+        expand:                      false;
+        str:                         "";
+        padding:                     12px 15px;
+        border-radius:               100%;
+        background-color:            @background-alt;
+        text-color:                  inherit;
     }
-
-    listview {
-        padding: 8;
-        border-radius: 0 0 10 10;
-        border: 2 2 2 2;
-        border-color: @bg0;
-        background-color: @bg0;
-        dynamic: false;
-    }
-
-    textbox {
-        text-color: @fg0;
-        background-color: inherit;
-    }
-
-    error-message {
-        border: 20 20 20 20;
-    }
-
-    entry, prompt, case-indicator {
-        text-color: inherit;
-    }
-
-    prompt {
-        margin: 0 10 0 0;
-    }
-
-    element {
-        padding: 5;
-        vertical-align: 0.5;
-        border-radius: 10;
-        background-color: @bg1;
-    }
-
-    element.selected.normal {
-        background-color: @grey0;
-    }
-
-    element.alternate.normal {
-        background-color: inherit;
-    }
-
-    element.normal.active, element.alternate.active {
-        background-color: @orange;
-    }
-
-    element.selected.active {
-        background-color: @green;
-    }
-
-    element.normal.urgent, element.alternate.urgent {
-        background-color: @red;
-    }
-
-    element.selected.urgent {
-        background-color: @blue;
-    }
-
-    element-text, element-icon {
-        size: 40;
-        margin: 0 10 0 0;
-        vertical-align: 0.5;
-        background-color: inherit;
-        text-color: @fg0;
-    }
-
-    element-text .active, element-text .urgent {
-        text-color: @bg0;
-    }
-    '';
-    ".config/rofi/themes/rounded-gray.rasi".text = ''
-    {
-        font:   "Roboto 12";
-
-        background-color:   transparent;
-        text-color:         @fg0;
-
-        margin:     0px;
-        padding:    0px;
-        spacing:    0px;
-
-        bg0:    #212121F2;
-        bg1:    #2A2A2A;
-        bg2:    #3D3D3D80;
-        bg3:    #616161F2;
-        fg0:    #E6E6E6;
-        fg1:    #FFFFFF;
-        fg2:    #969696;
-        fg3:    #3D3D3D;
-    }
-
-    window {
-        location:       north;
-        y-offset:       calc(50% - 176px);
-        width:          480;
-        border-radius:  24px;
-
-        background-color:   @bg0;
-    }
-
-    mainbox {
-        padding:    12px;
-    }
-
-    inputbar {
-        background-color:   @bg1;
-        border-color:       @bg3;
-
-        border:         2px;
-        border-radius:  16px;
-
-        padding:    8px 16px;
-        spacing:    8px;
-        children:   [ prompt, entry ];
-    }
-
-    prompt {
-        text-color: @fg2;
-    }
-
     entry {
-        placeholder:        "Search";
-        placeholder-color:  @fg3;
+        enabled:                     true;
+        expand:                      false;
+        width:                       420px;
+        padding:                     12px 16px;
+        border-radius:               100%;
+        background-color:            @background-alt;
+        text-color:                  inherit;
+        cursor:                      text;
+        placeholder:                 "Search";
+        placeholder-color:           inherit;
+    }
+    dummy {
+        expand:                      true;
+        background-color:            transparent;
     }
 
-    message {
-        margin:             12px 0 0;
-        border-radius:      16px;
-        border-color:       @bg2;
-        background-color:   @bg2;
-    }
-
-    textbox {
-        padding:    8px 24px;
-    }
-
+    /*****----- Listview -----*****/
     listview {
-        background-color:   transparent;
-
-        margin:     12px 0 0;
-        lines:      8;
-        columns:    1;
-
-        fixed-height: false;
+        enabled:                     true;
+        columns:                     1;
+        lines:                       7;
+        cycle:                       true;
+        dynamic:                     true;
+        scrollbar:                   false;
+        layout:                      vertical;
+        reverse:                     false;
+        fixed-height:                true;
+        fixed-columns:               true;
+        
+        spacing:                     10px;
+        background-color:            transparent;
+        text-color:                  @foreground;
+        cursor:                      "default";
     }
 
+    /*****----- Elements -----*****/
     element {
-        padding:        8px 16px;
-        spacing:        8px;
-        border-radius:  16px;
+        enabled:                     true;
+        spacing:                     10px;
+        padding:                     4px;
+        border-radius:               100%;
+        background-color:            transparent;
+        text-color:                  @foreground;
+        cursor:                      pointer;
     }
-
-    element normal active {
-        text-color: @bg3;
+    element normal.normal {
+        background-color:            inherit;
+        text-color:                  inherit;
     }
-
-    element alternate active {
-        text-color: @bg3;
+    element normal.urgent {
+        background-color:            @urgent;
+        text-color:                  @foreground;
     }
-
-    element selected normal, element selected active {
-        background-color:   @bg3;
+    element normal.active {
+        background-color:            @active;
+        text-color:                  @foreground;
     }
-
+    element selected.normal {
+        background-color:            @selected;
+        text-color:                  @foreground;
+    }
+    element selected.urgent {
+        background-color:            @urgent;
+        text-color:                  @foreground;
+    }
+    element selected.active {
+        background-color:            @urgent;
+        text-color:                  @foreground;
+    }
     element-icon {
-        size:           1em;
-        vertical-align: 0.5;
+        background-color:            transparent;
+        text-color:                  inherit;
+        size:                        32px;
+        cursor:                      inherit;
     }
-
     element-text {
-        text-color: inherit;
+        background-color:            transparent;
+        text-color:                  inherit;
+        cursor:                      inherit;
+        vertical-align:              0.5;
+        horizontal-align:            0.0;
     }
     '';
     ".config/fastfetch/config.jsonc".text = ''
