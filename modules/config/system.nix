@@ -28,6 +28,28 @@
     };
     nixpkgs.config.allowUnfree = true;
     nix.settings.experimental-features = ["nix-command" "flakes"];
+    boot= {
+      consoleLogLevel = 3;
+      initrd.verbose = false;
+      kernelParams = [
+        "quiet"
+        "splash"
+        "boot.shell_on_fail"
+        "udev.log_priority=3"
+        "rd.systemd.show_status=auto"
+      ];
+      loader = {
+            systemd-boot.enable = false;
+            efi.canTouchEfiVariables = true;
+            timeout = 5;
+            grub = {
+                efiSupport = true;
+                enable = true;
+                useOSProber = true;
+                device = "nodev";
+            };
+        };
+    };
     programs.nh = {
       enable = true;
       clean= {
