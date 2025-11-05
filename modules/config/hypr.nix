@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, inputs, lib, ... }:
 {
   options = {
     hypr.enable = 
@@ -7,7 +7,11 @@
   config = lib.mkIf config.hypr.enable {
     programs.hyprland = {
       enable = true;
-      xwayland.enable = true;
+      xwayland.enable = true;};
+    nix.settings = {
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
     services.desktopManager.cosmic = {
       enable = true;
@@ -17,10 +21,6 @@
       WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";
       # QT_QPA_PLATFORMTHEME = "qt5ct";
-    };
-    xdg.portal = {
-      enable = true;
-      extraPortals = [pkgs.xdg-desktop-portal-hyprland];
     };
     environment.systemPackages = with pkgs; [
     libnotify

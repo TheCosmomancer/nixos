@@ -50,7 +50,8 @@
     rustc
     cargo
     rust-analyzer
-    whisper-cpp
+    cmake
+    ffmpeg
     beam27Packages.elixir
     # texliveFull
     # pandoc
