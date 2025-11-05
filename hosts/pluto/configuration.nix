@@ -29,6 +29,7 @@
       mkcd = "mkdir -p \"$1\" && cd \"$1\"";
       ls = "eza --git -F --color-scale --icons --group-directories-first";
       lsa = "eza --git -F -a --color-scale --icons --group-directories-first";
+      gitshad = "git add -A && git commit -m \".\" && git push";
     };
   };
   security.sudo.extraRules = [{

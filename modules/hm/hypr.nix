@@ -9,6 +9,7 @@
   };
   
   wayland.windowManager.hyprland = {
+    enable = true;
     settings = {
         monitor = [
             "eDP-1, 1920x1080@60, 0x0, 1"
@@ -128,8 +129,7 @@
             "$mainMod, C, killactive,"
             "$mainMod, M, exit,"
             "$mainMod, V, togglefloating,"
-            "$mainMod, T, exec, pkill -SIGUSR1 -f ai_panel.py"
-            "ALT, TAB, workspace, previous"
+            "$mainMod, ALT, workspace, previous"
 
             # Move focus with mainMod + arrow keys
             "$mainMod, left, movefocus, l"
@@ -199,6 +199,10 @@
             "blur, eww-bar"
             "xray 1, eww-bar"
         ];
+        ecosystem = {
+            "no_update_news" = true;
+            "no_donation_nag" = true;
+        };
     };
   };
 }
