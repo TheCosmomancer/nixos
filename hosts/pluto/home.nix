@@ -2,9 +2,27 @@
 {
 programs.rofi.enable = true;
 stylix = {
+    base16Scheme = {
+      base00 = "#282828";
+      base01 = "#3c3836";
+      base02 = "#504945";
+      base03 = "#665c54";
+      base04 = "#928374";
+      base05 = "#ebdbb2";
+      base06 = "#fbf1c7";
+      base07 = "#f9f5d7";
+      base08 = "#cc241d";
+      base09 = "#d65d0e";
+      base0A = "#d79921";
+      base0B = "#98971a";
+      base0C = "#689d6a";
+      base0D = "#458588";
+      base0E = "#b16286";
+      base0F = "#9d0006";
+    };
     enable = true;
     autoEnable = false;
-    targets.gnome.enable = false;
+    targets.firefox.enable = true;
     targets.rofi.enable = true;
 };
 
@@ -301,13 +319,6 @@ stylix = {
         valign = center
     }
     '';
-        # COLORS IN GLOBAL
-        # background:                  #231419;
-        # background-alt:              #2D1E23;
-        # foreground:                  #FFFFFF;
-        # selected:                    #426647;
-        # active:                      #2E3F34;
-        # urgent:                      #D08261;
     ".config/rofi/config.rasi".text = ''
     configuration {
         show-icons: true;

@@ -54,7 +54,7 @@
         nixpkgs.config.allowUnfree = true;
         # Let Home Manager install and manage itself.
         programs.home-manager.enable = true;
-        imports = [../../modules/hm];
+        imports = [./home.nix];
         #just don't change this and you'll be fine
         home.stateVersion = "24.11";
       };
