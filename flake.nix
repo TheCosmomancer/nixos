@@ -31,6 +31,7 @@
         inputs.home-manager.nixosModules.default
         inputs.nixvim.nixosModules.nixvim
         inputs.stylix.nixosModules.stylix
+        inputs.stylix.homeModules.stylix
       ];
     };
   };
