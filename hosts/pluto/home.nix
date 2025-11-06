@@ -1,8 +1,12 @@
-{ config, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 {
 programs.rofi.enable = true;
-stylix.targets.rofi.enable = true;
-
+stylix = {
+    enable = true;
+    autoEnable = false;
+    targets.gnome.enable = false;
+    targets.rofi.enable = true;
+};
 
 # SECTION: HYPRLAND
 
