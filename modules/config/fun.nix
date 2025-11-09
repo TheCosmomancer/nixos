@@ -11,7 +11,6 @@
         dxvk_2
         steam
         lutris
-        mommy
         cmatrix
         cbonsai
         rust-stakeholder

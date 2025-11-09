@@ -19,9 +19,6 @@
     };
     
     environment.systemPackages = with pkgs; [
-      libnotify
-      dunst
-      wired
       hyprland-qtutils
       eww
       hyprlock

@@ -30,7 +30,6 @@
     localsend
     copyq
     geeqie
-    rink
     librewolf
     #CLI TOOLS
     p7zip
@@ -69,7 +68,7 @@
       enable = true;
       tunMode.enable = true;
       tunMode.setuid = false;
-    };
+    }; # get configs at https://github.com/barry-far/V2ray-Config
     services.cloudflare-warp.enable = true;
     programs.yazi = {
       enable =true;

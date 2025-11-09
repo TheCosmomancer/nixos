@@ -1,6 +1,5 @@
 { config, inputs, pkgs, ... }:
 {
-programs.rofi.enable = true;
 stylix = {
     base16Scheme = {
       base00 = "#282828";
@@ -21,8 +20,8 @@ stylix = {
       base0F = "#9d0006";
     };
     enable = true;
-    autoEnable = false;
     targets.firefox.enable = true;
+    targets.firefox.profileNames = [ "default" ];
     targets.rofi.enable = true;
 };
 
@@ -47,7 +46,7 @@ stylix = {
         "$terminal" = "ghostty";
         "$fileManager" = "thunar";
         "$menu" = "rofi -show drun";
-        "$screenshot" = "hyprshot -o ~/hyprshot -z -m region";
+        "$screenshot" = "hyprshot -o ~/Pictures/hyprshot -z -m region";
         "$browser" = "firefox";
         "$VPN" = "nekoray";
         "$editor" = "code";
@@ -340,6 +339,12 @@ stylix = {
     /*****----- Global Properties -----*****/
     * {
         font:                        "JetBrains Mono Nerd Font 10";
+        background:                  #231419;
+        background-alt:              #2D1E23;
+        foreground:                  #FFFFFF;
+        selected:                    #426647;
+        active:                      #2E3F34;
+        urgent:                      #D08261;
     }
 
     /*****----- Main Window -----*****/
@@ -548,6 +553,398 @@ stylix = {
         "break"
         ]
     }
+    '';
+    ".config/eww/eww.yuck".text = ''
+    ;; Variables
+    (defvar power_menu_open false)
+    (defvar battery_hover false)
+    (defvar volume_open false)
+    (defvar music_hover false)
+    (defvar wifi_open false)
+    (defvar brightness_open false)
+    
+    ;; Polls
+    (defpoll time :interval "1s" "date \'+%H:%M\'")
+    (defpoll active_workspace :interval "100ms" "hyprctl activeworkspace -j | grep -o \'\"id\": [0-9]*\' | grep -o \'[0-9]*\'")
+    (defpoll volume_level :interval "1s" "amixer get Master | grep -o \'[0-9]*%\' | head -1 | tr -d \'%\'")
+    (defpoll volume_muted :interval "1s" "amixer get Master | grep -o \'off\' | wc -l")
+    (defpoll music_title :interval "2s" "playerctl metadata title 2>/dev/null || echo \'No Music\'")
+    (defpoll music_playing :interval "1s" "playerctl status 2>/dev/null || echo \'Stopped\'")
+    (defpoll music_shuffle :interval "2s" "playerctl shuffle 2>/dev/null || echo \'Off\'")
+    (defpoll music_loop :interval "2s" "playerctl loop 2>/dev/null || echo \'None\'")
+    (defpoll current_power_profile :interval "5s" "powerprofilesctl get")
+    (defpoll brightness_level :interval "1s" "brightnessctl | grep -o \'(.*)\' | grep -o \'[0-9]*\'")
+    (defpoll warp_status :interval "2s" "warp-cli status | grep -q \'Connected\' && echo \'connected\' || echo \'disconnected\'")
+    
+    ;; Widgets
+    (defwidget workspaces []
+        (box :class "baseelement" :space-evenly false :spacing 5
+        (for ws in "[1,2,3,4,5]"
+            (button :class "${active_workspace == ws ? \'aws\' : \'iws\'}"
+                    :onclick "hyprctl dispatch workspace ${ws}"
+            "${active_workspace == ws ? \'󰮯\' : \'\'}"))))
+    
+    (defwidget music []
+        (box :class "${music_title == \'No Music\' ? \'invis\':\'baseelement\'}" :space-evenly false
+        (eventbox :onhover "${EWW_CMD} update music_hover=true"
+                    :onhoverlost "${EWW_CMD} update music_hover=false"
+            (box :space-evenly false
+            (revealer :reveal music_hover :transition "slideleft"
+                (box :class "baseelement" :spacing 5
+                (button :class "song_btn_prev" :onclick "playerctl previous" "⏮")))
+            (button :class "song" :onclick "playerctl play-pause"
+            (label :text "${music_title == \'No Music\' ? \'\':\'${music_title}\'}" :limit-width 25))
+            (revealer :reveal music_hover :transition "slideright"
+            (box :class "baseelement" :spacing 5
+                (button :class "song_btn_next" :onclick "playerctl next" "⏭")))))))
+    
+    (defwidget volume []
+        (box :class "baseelement" :space-evenly false
+        (eventbox :onhover "${EWW_CMD} update volume_open=true"
+                    :onhoverlost "${EWW_CMD} update volume_open=false"
+            (box :space-evenly false
+            (revealer :reveal volume_open :transition "slideleft"
+                (scale :class "volbar" :value volume_level :min 0 :max 100
+                    :onchange "amixer set Master {}%"))
+            (button :class "volume_icon"
+                :onclick "amixer set Master toggle"
+                (label :text "${volume_muted == \'2\' ? \'\' : \'\'}"))))))
+    
+    (defwidget brightness []
+        (box :class "baseelement" :space-evenly false
+        (eventbox :onhover "${EWW_CMD} update brightness_open=true"
+                    :onhoverlost "${EWW_CMD} update brightness_open=false"
+            (box :space-evenly false
+            (revealer :reveal brightness_open :transition "slideleft"
+                (scale :class "brightbar" :value brightness_level :min 0 :max 100
+                    :onchange "brightnessctl set {}%"))
+            (button :class "bright_icon"
+                (label :text "󰃟"))))))
+    
+    (defwidget battery []
+        (box :class "bat_module"
+        (eventbox :onhover "${EWW_CMD} update battery_hover=true"
+                    :onhoverlost "${EWW_CMD} update battery_hover=false"
+            (box :space-evenly false
+            (revealer :reveal battery_hover :transition "slideleft"
+                (box :class "baseelement" :orientation "h" :spacing 5
+                (button :class "${current_power_profile == \'performance\' ? \'song_btn_play\' : \'song_btn_prev\'}"
+                        :onclick "powerprofilesctl set performance"
+                    "󰈸")
+                (button :class "${current_power_profile == \'balanced\' ? \'song_btn_play\' : \'song_btn_prev\'}"
+                        :onclick "powerprofilesctl set balanced"
+                    "")
+                (button :class "${current_power_profile == \'power-saver\' ? \'song_btn_play\' : \'song_btn_prev\'}"
+                        :onclick "powerprofilesctl set power-saver"
+                    "󰂏")))
+            (circular-progress :class "batbar"
+                                :value {EWW_BATTERY["BAT0"].capacity}
+                                :thickness 4
+            (button 
+                :class "iconbat"
+                :limit-width 2
+                :tooltip "Battery ${EWW_BATTERY["BAT0"].capacity}%"
+                "${EWW_BATTERY["BAT0"].status == \'Discharging\' ? \'\' : \'󱐋\'}")
+            )))))
+    
+    (defwidget power_menu []
+        (box :class "baseelement"
+        (eventbox :onhover "${EWW_CMD} update power_menu_open=true"
+                    :onhoverlost "${EWW_CMD} update power_menu_open=false"
+            (box :space-evenly false
+            (revealer :reveal power_menu_open :transition "slideleft"
+                (box :class "baseelement" :spacing 5
+                (button :class "song_btn_prev" :onclick "hyprlock&" "")
+                (button :class "song_btn_prev" :onclick "systemctl reboot" "")
+                (button :class "song_btn_prev" :onclick "systemctl poweroff" "⏻ ")))
+            (button :class "song_btn_play" (label :text ""))))))
+    
+    (defwidget warp_toggle []
+        (button :class "${warp_status == \'connected\' ? \'song_btn_play\' : \'song_btn_prev\'}"
+                :onclick "${warp_status == \'connected\' ? \'warp-cli disconnect\' : \'warp-cli connect\'}"
+                :tooltip "${warp_status == \'connected\' ? \'Warp Connected\' : \'Warp Disconnected\'}"
+        (label :text "${warp_status == \'connected\' ? \'󰅠\' : \'󰅟\'}" :class "module-wif"))
+    )
+    
+    (defwidget clock []
+        (box :class "baseelement"
+        (label :class "clock_time_class" :text time)))
+    
+    (defwidget systembar []
+        (systray))
+    
+    (defwidget bar []
+        (eventbox :onhoverlost "${EWW_CMD} update power_menu_open=false
+                                ${EWW_CMD} update battery_hover=false
+                                ${EWW_CMD} update volume_open=false
+                                ${EWW_CMD} update wifi_open=false
+                                ${EWW_CMD} update music_hover=false
+                                ${EWW_CMD} update brightness_open=false"
+        (centerbox :class "invis"
+        (box :class "basebar" :halign "start" :space-evenly false
+            (workspaces))
+        (box :class "${music_title == \'No Music\' ? \'invis\':\'basebar\'}" :halign "center"
+            (music))
+        (box :class "basebar" :halign "end" :space-evenly false :spacing 10
+            (warp_toggle)
+            (volume)
+            (brightness)
+            (battery)
+            (power_menu)
+            (systembar)
+            (clock)))))
+    
+    ;; Window
+    (defwindow bar
+        :monitor 0
+        :geometry (geometry :x "0%"
+                            :y "0%"
+                            :width "100%"
+                            :height "24px"
+                            :anchor "top center")
+        :stacking "fg"
+        :exclusive true
+        (bar))
+    '';
+    ".config/eww/eww.scss".text = ''
+    * {
+    all: unset;
+        font-family: "JetBrainsMono Nerd Font Propo";
+    }
+
+    /** General **/
+    .basebar {
+        background-color: #0f0f17;
+        border-radius: 50px;
+        padding: 0px 10px;
+    }
+
+    .baseelement {
+        margin: 0px 5px 0px 5px;
+        border-radius: 10px;
+        background-color: #0f0f17;
+        padding: 0px 0px;
+    }
+    .invis {
+        background-color:transparent;
+        color:transparent;
+    }
+    /** tooltip **/
+    tooltip.background {
+        background-color: #0f0f17;
+        font-size: 18;
+        border-radius: 10px;
+        color: #bfc9db;
+    }
+
+    tooltip label {
+        margin: 3px;
+    }
+
+    /** Workspaces **/
+    .iws {
+        color: #3e424f;
+        font-size: 10px;
+        font-weight: normal;
+        background: transparent;
+        padding: 1px 8px;
+        border-radius: 4px;
+    }
+
+    .aws {
+        color: #a1bdce;
+        font-size: 27px;
+        font-weight: normal;
+        background: transparent;
+        padding: 1px 8px;
+        border-radius: 4px;
+    }
+
+    /** Clock **/
+    .clock_time_class {
+        font-size: 23;
+        color: #bfc9db;
+        font-weight: bold;
+        margin: 0px 5px 0px 0px;
+    }
+
+    /** Music **/
+    .song {
+        color: #a1bdce;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 3px 5px 0px 0px;
+        background: transparent;
+    }
+
+    .song_btn_play {
+        color: #3d7da4;
+        font-size: 28px;
+        margin: 3px 5px 0px 5px;
+        background: transparent;
+    }
+
+    .song_btn_prev,
+    .song_btn_next {
+        color: #7fc9db;
+        font-size: 24px;
+        margin: 3px 5px 0px 5px;
+        background: transparent;
+    }
+
+    .song_btn_prev:hover,
+    .song_btn_next:hover {
+        color: #a1bdce;
+    }
+
+    /** Volume **/
+    .volume_icon {
+        font-size: 22;
+        color: #a1bdce;
+        margin: 0px 10px 0px 10px;
+        background: transparent;
+    }
+
+    .volume_icon:hover {
+        color: #77a5bf;
+    }
+
+
+    .volbar trough highlight {
+        background-color: #22242b;
+        border-radius: 16px;
+    }
+
+    .volbar trough highlight {
+        background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100%);
+        border-radius: 10px;
+    }
+
+    /** Brightness **/
+    .bright_icon {
+        font-size: 22;
+        color: #e4c9af;
+        margin: 0px 10px 0px 10px;
+        background: transparent;
+    }
+
+    .brightbar trough highlight {
+        background-color: #22242b;
+        border-radius: 16px;
+    }
+
+    .brightbar trough highlight {
+        background-image: linear-gradient(to right, #e4c9af 30%, #f2cdcd 50%, #e0b089 100%);
+        border-radius: 10px;
+    }
+
+    /** Battery **/
+    .bat_module {
+        background-color: #0f0f17;
+        border-radius: 16px;
+        margin: 0px 10px 0px 10px;
+        padding: 4px 8px;
+    }
+
+    .iconbat {
+        color: #afbea2;
+        font-size: 15;
+        margin: 10px;
+        background: transparent;
+    }
+
+    .batbar {
+        color: #a6e3a1;
+        background-color: #38384d;
+        border-radius: 50%;
+        min-width: 32px;
+        min-height: 32px;
+        font-size: 9px;
+        font-weight: bold;
+    }
+
+    /** Warp Toggle **/
+    .module-wif {
+        font-size: 22;
+        color: #a1bdce;
+        border-radius: 100%;
+        margin: 0px 10px 0px 5px;
+    }
+
+    /** System Tray **/
+    systray {
+        background: transparent;
+    }
+    systray>*:hover {
+        color: #77a5bf; }
+    /** Scale general **/
+    scale trough {
+        all: unset;
+        background-color: #22242b;
+        box-shadow: 0 2px 3px 2px #06060b;
+        border-radius: 16px;
+        min-height: 10px;
+        min-width: 70px;
+        margin: 0px 10px 0px 0px;
+    }
+
+    scale slider {
+        background: transparent;
+        border-radius: 50%;
+        min-width: 12px;
+        min-height: 12px;
+    }
+
+    /** Hover effects **/
+
+    .zero:hover {
+        background: rgba(161, 189, 206, 0.3);
+    }
+
+    .one:hover {
+        background: rgba(161, 189, 206, 0.3);
+    }
+    /** Network Manager Applet Popup **/
+    .popup {
+        background-color: #0f0f17;
+        border-radius: 10px;
+        color: #bfc9db;
+        padding: 8px;
+        margin: 5px;
+        font-size: 14px;
+    }
+
+    .popup * {
+        color: #bfc9db;
+    }
+
+    .popup button {
+        background: transparent;
+        border-radius: 6px;
+        padding: 4px 8px;
+        margin: 2px;
+    }
+
+    .popup button:hover {
+        background: rgba(161, 189, 206, 0.3);
+        color: #a1bdce;
+    }
+
+    .popup menuitem {
+        background: transparent;
+        border-radius: 6px;
+        padding: 4px 8px;
+        margin: 1px;
+    }
+
+    .popup menuitem:hover {
+        background: rgba(161, 189, 206, 0.3);
+        color: #a1bdce;
+    }
+
+    .popup separator {
+        background-color: #3e424f;
+        margin: 4px 0px; }
     '';
   };
 }

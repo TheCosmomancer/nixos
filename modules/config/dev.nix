@@ -14,7 +14,6 @@
     #   LD_LIBRARY_PATH = ["${pkgs.gcc.cc.lib}/lib"];};
     environment.systemPackages = with pkgs;[
     git
-    lazygit
     gh
     vscode
     (python312.withPackages(pypkgs: with pypkgs;[
@@ -36,6 +35,7 @@
     fastapi
     sqlalchemy
     uvicorn
+    python-multipart
     pynput
     faster-whisper
     pyaudio
@@ -46,7 +46,6 @@
     pkg-config
     portaudio
     zlib
-    ruff
     rustc
     cargo
     rust-analyzer
