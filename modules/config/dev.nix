@@ -50,6 +50,7 @@
     cargo
     rust-analyzer
     cmake
+    libclang
     ffmpeg
     beam27Packages.elixir
     # texliveFull

@@ -30,7 +30,6 @@
     localsend
     copyq
     geeqie
-    librewolf
     #CLI TOOLS
     p7zip
     wget
