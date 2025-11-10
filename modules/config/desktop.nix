@@ -17,7 +17,6 @@
     nomacs
     obsidian
     telegram-desktop
-    discord
     bitwarden-desktop
     gnome-font-viewer
     rustdesk
@@ -28,6 +27,7 @@
     shotcut
     audio-recorder
     localsend
+    gnome-disk-utility
     copyq
     geeqie
     #CLI TOOLS
