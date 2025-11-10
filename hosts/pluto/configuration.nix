@@ -56,7 +56,7 @@
         programs.home-manager.enable = true;
         imports = [./home.nix];
         #just don't change this and you'll be fine
-        home.stateVersion = "24.11";
+        home.stateVersion = "25.05";
       };
     };
   };
