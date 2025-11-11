@@ -4,12 +4,6 @@
     dev.enable = 
       lib.mkEnableOption "enables dev";
   };
-  config = lib.mkIf config.dev.enable {
-    nix.settings = {
-      max-jobs = 1;
-      cores = 2;
-      keep-going = false;
-    };
     # environment.sessionVariables = {
     #   LD_LIBRARY_PATH = ["${pkgs.gcc.cc.lib}/lib"];};
     environment.systemPackages = with pkgs;[
@@ -21,20 +15,14 @@
     tkinter
     pygame
     numpy
-    pandas
-    matplotlib
-    seaborn
-    nltk
-    ipykernel
     pip
     jupyter
-    tensorflow
-    scikit-learn
     pygobject3
     pydantic
     fastapi
     sqlalchemy
     uvicorn
+    pyjwt
     python-multipart
     pynput
     faster-whisper
