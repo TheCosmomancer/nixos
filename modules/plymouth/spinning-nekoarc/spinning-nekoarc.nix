@@ -2,7 +2,7 @@
 
 stdenv.mkDerivation rec {
   pname = "spinning-nekoarc-plymouth-theme";
-  version = "1.0";
+  version = "2.0";
 
   src = ./.;
 
