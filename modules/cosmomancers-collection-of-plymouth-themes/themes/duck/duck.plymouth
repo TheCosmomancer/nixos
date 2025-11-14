@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=duck
+Description=quack
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/duck
+ScriptFile=/usr/share/plymouth/themes/duck/animated-boot.script
