@@ -389,7 +389,8 @@
           # (adi1090x-plymouth-themes.override {
           # selected_themes = [ "deus_ex" ];
           # })
-          (pkgs.callPackage ../../modules/cosmomancers-collection-of-plymouth-themes/cosmomancers-collection-of-plymouth-themes.nix {})
+          (pkgs.callPackage ../../modules/plymouth/spinning-nekoarc/spinning-nekoarc.nix {})
+          (pkgs.callPackage ../../modules/plymouth/duck/duck.nix {})
       ];
     };
     fonts = {

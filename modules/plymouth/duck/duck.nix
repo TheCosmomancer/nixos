@@ -1,7 +1,7 @@
 { stdenv, lib }:
 
 stdenv.mkDerivation rec {
-  pname = "cosmomancers-collection-of-plymouth-themes";
+  pname = "duck-plymouth-theme";
   version = "1.0";
 
   src = ./.;
@@ -11,14 +11,14 @@ stdenv.mkDerivation rec {
   installPhase = ''
     runHook preInstall
     
-    mkdir -p $out/share/plymouth/themes/mytheme
-    cp -r ./themes/* $out/share/plymouth/themes/mytheme/
+    mkdir -p $out/share/plymouth/themes/duck
+    cp -r ./source/* $out/share/plymouth/themes/duck/
     
     runHook postInstall
   '';
 
   meta = with lib; {
-    description = "Cosmomancers collection of plymouth themes";
+    description = "duck plymouth theme";
     # license = licenses.mit;
     platforms = platforms.linux;
   };
