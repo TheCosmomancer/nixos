@@ -95,6 +95,7 @@
     cargo
     rust-analyzer
     cmake
+    gcc
     libclang
     ffmpeg
     beam27Packages.elixir
@@ -140,7 +141,6 @@
     rustdesk
     nwg-look
     ghostty
-    kitty
     virt-manager
     mission-center
     shotcut
@@ -148,8 +148,8 @@
     localsend
     gnome-disk-utility
     handbrake
-    copyq
-    geeqie
+    meld
+    xarchiver
     strawberry
     #CLI TOOLS
     cpulimit
@@ -169,6 +169,7 @@
     clock-rs
     jp2a
     bat
+    unrar
     ripgrep
     #HYPRLAND
     alsa-utils
@@ -253,6 +254,14 @@
     };
     programs.firefox = {
       enable = true;
+      autoConfig = ''
+        defaultPref("sidebar.verticalTabs", true);
+        defaultPref("sidebar.expandOnHover", true);
+        defaultPref("sidebar.animation.enabled", false);
+        defaultPref("browser.startup.page", 3);
+        defaultPref("toolkit.telemetry.enabled", false);
+        defaultPref("sidebar.position_start", true);
+      '';# true = left, false = right
       policies = {
         DontCheckDefaultBrowser = true;
         DisablePocket = true;
@@ -262,6 +271,19 @@
         DisableSetDesktopBackground = true;
         OfferToSaveLogins = false;
         SkipTermsOfUse = true;
+        SearchEngines = {
+          Add = [
+            {
+              Name = "Brave Search";
+              URLTemplate = "https://search.brave.com/search?q={searchTerms}";
+              Method = "GET";
+              IconURL = "https://cdn.search.brave.com/serp/v2/_app/immutable/assets/brave-search-icon.CsIFM2aN.svg";
+              Alias = "@brave";
+            }
+          ];
+          Default = "Brave Search";
+          PreventInstalls = false;
+        };
         ExtensionSettings = {
           "uBlock0@raymondhill.net" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
@@ -313,15 +335,16 @@
       base0E = "#b16286";
       base0F = "#9d0006";
     };
-    # cursor = {
-    #   package = pkgs.bibata-cursors;
-    #   name = "Bibata-Modern-Classic";
-    # };
-    # fonts = {
-    #   monospace ={
-    #     package = JetBrainsMono;
-    #     name = "JetBrainsMono Nerd Font Mono";
-    #   };
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+      size = 24;
+    };
+    fonts = {
+      monospace ={
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Mono";
+      };
     #   sansSerif = {
     #     package = JetBrainsMono;
     #     name = "JetBrainsMono Nerd Font";
@@ -330,12 +353,22 @@
     #     package = JetBrainsMono;
     #     name = "JetBrainsMono Nerd Font";
     #   };
-    # };
+      emoji = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Propo";
+      };
+      # sizes = {
+      #   applications = 12;
+      #   terminal = 15;
+      #   desktop = 10;
+      #   popups = 10;
+      # };
+    };
     opacity = {
       applications = 1.0;
       desktop = 1.0;
       popups = 1.0;
-      terminal = 0.7;
+      terminal = 0.70;
     };
     polarity = "dark";
     targets = {
@@ -350,34 +383,22 @@
     };
     boot.plymouth = {
       enable = true;
-      theme = "deus_ex";
+      theme = "duck";
       themePackages = with pkgs; [
           # By default we would install all themes
-          (adi1090x-plymouth-themes.override {
-          selected_themes = [ "deus_ex" ];
-          })
+          # (adi1090x-plymouth-themes.override {
+          # selected_themes = [ "deus_ex" ];
+          # })
+          (pkgs.callPackage ../../modules/cosmomancers-collection-of-plymouth-themes/cosmomancers-collection-of-plymouth-themes.nix {})
       ];
     };
     fonts = {
       packages = with pkgs; [
         dejavu_fonts
         nerd-fonts.jetbrains-mono
-        noto-fonts-monochrome-emoji
         vazir-fonts
         shabnam-fonts
       ];
-    
-      # fontconfig = {
-      #   enable = true;
-      #   defaultFonts = {
-      #     serif = [ "DejaVu Serif" ];
-      #     sansSerif = [ "DejaVu Sans" ];
-      #     monospace = [ "JetBrains Mono Nerd Font" ];
-      #     emoji = [ "Noto Emoji" ];
-      #     # emoji = [ "Beedii" "Noto Emoji" ];
-      #   };
-      # };
-      # Enable font discovery for applications
       fontDir.enable = true;
   };
 

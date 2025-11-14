@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=spinning-nekoarc
+Description=weeeeeee
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/spinning-nekoarc
+ScriptFile=/usr/share/plymouth/themes/spinning-nekoarc/animated-boot.script

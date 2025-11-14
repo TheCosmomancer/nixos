@@ -1,29 +1,14 @@
 { config, inputs, pkgs, ... }:
 {
-stylix = {
-    base16Scheme = {
-      base00 = "#282828";
-      base01 = "#3c3836";
-      base02 = "#504945";
-      base03 = "#665c54";
-      base04 = "#928374";
-      base05 = "#ebdbb2";
-      base06 = "#fbf1c7";
-      base07 = "#f9f5d7";
-      base08 = "#cc241d";
-      base09 = "#d65d0e";
-      base0A = "#d79921";
-      base0B = "#98971a";
-      base0C = "#689d6a";
-      base0D = "#458588";
-      base0E = "#b16286";
-      base0F = "#9d0006";
+    stylix = {
+        enable = true;
+        targets.firefox.enable = true;
+        targets.firefox.profileNames = [ "default" ];
+        targets.ghostty.enable = true;
     };
-    enable = true;
-    targets.firefox.enable = true;
-    targets.firefox.profileNames = [ "default" ];
-    targets.rofi.enable = true;
-};
+    programs = {
+        ghostty.enable = true;
+    };
 
 # SECTION: HYPRLAND
 
@@ -55,7 +40,6 @@ stylix = {
         exec-once = [
             "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
             "systemctl --user start polkit-gnome-authentication-agent-1"
-            "hyprctl setcursor Bibata-Modern-Classic 24"
             "eww open bar"
             "nm-applet"
             # "mpc"
@@ -63,8 +47,6 @@ stylix = {
             "~/BehrazWebUI/ai_panel.py"
         ];
         env = [
-            "XCURSOR_SIZE,24"
-            "HYPRCURSOR_SIZE,24"
             "WLR_NO_HARDWARE_CURSORS,1"
             "XDG_CURRENT_DESKTOP,Hyprland"
             "XDG_SESSION_TYPE,wayland"
