@@ -232,6 +232,8 @@
             "telemetry.telemetryLevel" = "off";
             "python.analysis.typeCheckingMode" =  "standard";
             "chat.disableAIFeatures" = true;
+            "task.allowAutomaticTasks" = "off";
+            "extensions.ignoreRecommendations" = true;
             # "workbench.colorTheme" = "Gruvbox Dark Hard";
             # "editor.fontFamily" = "'JetBrains Mono Nerd Font'";
         };
@@ -249,6 +251,9 @@
         charliermarsh.ruff
         supermaven.supermaven
         myriad-dreamin.tinymist
+        antfu.slidev
+        davidanson.vscode-markdownlint
+        ms-vscode.cpptools
         ];
     };
   };

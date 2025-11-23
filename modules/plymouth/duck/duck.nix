@@ -2,7 +2,7 @@
 
 stdenv.mkDerivation rec {
   pname = "duck-plymouth-theme";
-  version = "2.0";
+  version = "3.0";
 
   src = ./.;
 
@@ -10,10 +10,9 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     runHook preInstall
-    
     mkdir -p $out/share/plymouth/themes/duck
     cp -r ./source/* $out/share/plymouth/themes/duck/
-    
+    find $out/share/plymouth/themes/ -name \*.plymouth -exec sed -i "s@\/usr\/@$out\/@" {} \;
     runHook postInstall
   '';
 

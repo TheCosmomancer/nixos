@@ -99,6 +99,8 @@
     libclang
     ffmpeg
     beam27Packages.elixir
+    nodejs_24
+    bun
     # texliveFull
     # pandoc
     typst
@@ -126,6 +128,13 @@
 
     #SECTION: DESKTOP
 
+    parabolic
+    resources
+    pinta
+    kdePackages.okular
+    audacity
+    switcheroo
+    impression
     vlc
     libreoffice
     brave
@@ -148,10 +157,16 @@
     localsend
     gnome-disk-utility
     handbrake
+    kdePackages.ark
     meld
     xarchiver
+    upscaler
+    losslesscut-bin
+    stirling-pdf
     strawberry
+    emblem
     #CLI TOOLS
+    micro-full
     cpulimit
     p7zip
     wget
@@ -198,6 +213,7 @@
     services.displayManager.gdm = {
       enable = true;
       wayland = true;
+      autoSuspend = false;
     };
     environment.sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = "1";
@@ -383,7 +399,7 @@
     };
     boot.plymouth = {
       enable = true;
-      theme = "duck";
+      theme = "spinning-nekoarc";
       themePackages = with pkgs; [
           # By default we would install all themes
           # (adi1090x-plymouth-themes.override {
