@@ -42,9 +42,7 @@
             "systemctl --user start polkit-gnome-authentication-agent-1"
             "eww open bar"
             "nm-applet"
-            # "mpc"
             "hyprpaper"
-            "~/BehrazWebUI/ai_panel.py"
         ];
         env = [
             "WLR_NO_HARDWARE_CURSORS,1"
@@ -135,6 +133,8 @@
             "$mainMod, D, exec, $browser"
             "$mainMod, X, exec, $editor"
             "$mainMod, O, exec, $obsidian"
+            "$mainMod, T, exec, Telegram"
+            "$mainMod, L, exec, hyprlock"
             "$mainMod, Escape, exec, $sysvital"
             "$mainMod, C, killactive,"
             "$mainMod, M, exit,"
@@ -234,6 +234,8 @@
             "chat.disableAIFeatures" = true;
             "task.allowAutomaticTasks" = "off";
             "extensions.ignoreRecommendations" = true;
+            "C_Cpp.default.compilerPath" = "/run/current-system/sw/bin/g++";
+            "python.testing.autoTestDiscoverOnSavePattern" = "*_test.py";
             # "workbench.colorTheme" = "Gruvbox Dark Hard";
             # "editor.fontFamily" = "'JetBrains Mono Nerd Font'";
         };
@@ -247,13 +249,14 @@
         mkhl.direnv
         rust-lang.rust-analyzer
         ms-toolsai.jupyter
-        # jdinhlife.gruvbox
         charliermarsh.ruff
         supermaven.supermaven
         myriad-dreamin.tinymist
         antfu.slidev
         davidanson.vscode-markdownlint
         ms-vscode.cpptools
+        #TODO ADD TABOUT MANUALLY
+        # jdinhlife.gruvbox
         ];
     };
   };

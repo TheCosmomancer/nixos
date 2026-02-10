@@ -1,7 +1,6 @@
 { config, pkgs, inputs, ... }:
-
 {
-
+    
   # SECTION: BASE
 
   imports =
@@ -10,7 +9,7 @@
       inputs.home-manager.nixosModules.default
     ];
 
-  networking.hostName = "pluto";
+  networking.hostName = "io";
   users.users.cosmomancer = {
     isNormalUser = true;
     description = "cosmomancer";
@@ -32,7 +31,6 @@
       HandleLidSwitch = "ignore";
     };
   home-manager = {
-    useGlobalPkgs = true;
     backupFileExtension = "backup";
     extraSpecialArgs = {inherit inputs; };
     users = {
@@ -44,12 +42,12 @@
         programs.home-manager.enable = true;
         imports = [./home.nix];
         #just don't change this and you'll be fine
-        home.stateVersion = "24.11";
+        home.stateVersion = "25.11";
       };
     };
   };
   #just don't change this and you'll be fine
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.11";
 
   #SECTION: DEVELOPMENT
 
@@ -70,7 +68,6 @@
   programs.virt-manager.enable = true;
     environment.shells = with pkgs; [ bash zsh ];
     environment.systemPackages = with pkgs;[
-    ntfs3g
     git
     gh
     vscode
@@ -89,8 +86,6 @@
     pyjwt
     python-multipart
     pynput
-    faster-whisper
-    pyaudio
     pytest
     pytest-asyncio
     httpx
@@ -101,8 +96,6 @@
     email-validator
     ]))
     ruff
-    python312Packages.xonsh
-    gcc
     pkg-config
     portaudio
     zlib
@@ -113,20 +106,18 @@
     gcc
     libclang
     ffmpeg
-    beam27Packages.elixir
+    # beam27Packages.elixir
     nodejs_24
     bun
     # texliveFull
     pandoc
     typst
-    dbgate
+    # dbgate
 
 
     #SECTION: FUN
 
     cockatrice
-    wineWowPackages.waylandFull
-    dxvk_2
     steam
     heroic
     cmatrix
@@ -135,54 +126,44 @@
     hollywood
     genact
     neo
-    lolcat
-    cowsay
+    # wineWowPackages.waylandFull
+    # dxvk_2
     #shadps4
 
     #SECTION: DESKTOP
 
     (bottles.override {removeWarningPopup = true;})
     kiwix
-    parabolic
-    resources
     pinta
     kdePackages.okular
     audacity
-    switcheroo
     impression
     vlc
     libreoffice
     brave
     gimp-with-plugins
     krita
-    hello
     inkscape-with-extensions
     obs-studio
-    xreader
-    nomacs
+    qimgv
+    nautilus
     obsidian
     telegram-desktop
     bitwarden-desktop
     gnome-font-viewer
-    rustdesk
+    anydesk
     nwg-look
     ghostty
-    mission-center
-    shotcut
-    audio-recorder
-    localsend
+    alacritty
+    fuzzel
+    openshot-qt
     gnome-disk-utility
     handbrake
     kdePackages.ark
-    meld
-    xarchiver
-    upscaler
+    kdiff3
     losslesscut-bin
-    stirling-pdf
     strawberry
-    emblem
     vesktop
-    clamtk
     # grayjay
     #CLI TOOLS
     micro-full
@@ -207,108 +188,46 @@
     rar
     ripgrep
     tree
-    #HYPRLAND
+    #WM
     alsa-utils
-    hyprland-qtutils
-    eww
-    quickshell
     hyprlock
+    waybar
     rofi
-    hyprshot
-    polkit_gnome
     networkmanagerapplet
-    #hyprpolkitagent
-    # hyprpanel
-    # alsa-utils
-    # wireplumber
-    # libgtop
-    # dart-sass
-    # wl-clipboard
-    # bluez
     bibata-cursors
     lyra-cursors
     phinger-cursors
     everforest-cursors
     gruvbox-plus-icons
     ];
-    programs.hyprland = {
+    programs.niri = {
       enable = true;
-      xwayland.enable = true;
+      useNautilus = true;
       };
     services.displayManager.gdm = {
       enable = true;
       wayland = true;
       autoSuspend = false;
     };
-    environment.sessionVariables = {
-      WLR_NO_HARDWARE_CURSORS = "1";
-      NIXOS_OZONE_WL = "1";
-    };
-    
+    # services.displayManager.cosmic-greeter.enable = true;
+
     services.gnome.gnome-keyring.enable = true;
     
-    systemd = {
-      user.services.polkit-gnome-authentication-agent-1 = {
-        description = "polkit-gnome-authentication-agent-1";
-        wantedBy = [ "graphical-session.target" ];
-        wants = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-        };
-      };
-    };
     programs.zoxide = {
       enable = true;
       enableZshIntegration = true;
     };
-    programs.direnv = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    services.lorri.enable = true;
-    
     programs.nekoray = {
       enable = true;
       tunMode.enable = true;
       tunMode.setuid = false;
-    }; #TODO get configs at https://github.com/barry-far/V2ray-Config
-    # In your configuration.nix
-  services.clamav = {
-    daemon.enable = true;
-    updater.enable = true;
-  };
-    services.cloudflare-warp.enable = true;
+    };
     programs.yazi = {
       enable =true;
-    };
-    programs.xfconf.enable = true;
-    services.gvfs.enable = true;
-    services.udisks2.enable = true;
-    services.tumbler.enable = true;
-    programs.thunar = {
-        enable = true;
-        plugins = with pkgs.xfce; [
-        thunar-media-tags-plugin
-        thunar-archive-plugin
-        thunar-volman
-        ];
     };
     programs.firefox = {
       enable = true;
       package = pkgs.librewolf;
-      # autoConfig = ''
-      #   defaultPref("sidebar.verticalTabs", true);
-      #   defaultPref("sidebar.expandOnHover", true);
-      #   defaultPref("sidebar.animation.enabled", false);
-      #   defaultPref("browser.startup.page", 3);
-      #   defaultPref("toolkit.telemetry.enabled", false);
-      #   defaultPref("sidebar.position_start", true);
-      # '';# true = left, false = right
       policies = {
         DontCheckDefaultBrowser = true;
         DisablePocket = true;
@@ -362,90 +281,86 @@
 
   #SECTION: THEME
 
-  stylix = {
-    enable =true;
-    base16Scheme = {
-      base00 = "#282828";
-      base01 = "#3c3836";
-      base02 = "#504945";
-      base03 = "#665c54";
-      base04 = "#928374";
-      base05 = "#ebdbb2";
-      base06 = "#fbf1c7";
-      base07 = "#f9f5d7";
-      base08 = "#cc241d";
-      base09 = "#d65d0e";
-      base0A = "#d79921";
-      base0B = "#98971a";
-      base0C = "#689d6a";
-      base0D = "#458588";
-      base0E = "#b16286";
-      base0F = "#9d0006";
-    };
-    cursor = {
-      package = pkgs.everforest-cursors;
-      name = "everforest-cursors";
-      size = 24;
-    };
+#   stylix = {
+#     enable = true;
+#     base16Scheme = {
+#       base00 = "#282828";
+#       base01 = "#3c3836";
+#       base02 = "#504945";
+#       base03 = "#665c54";
+#       base04 = "#928374";
+#       base05 = "#ebdbb2";
+#       base06 = "#fbf1c7";
+#       base07 = "#f9f5d7";
+#       base08 = "#cc241d";
+#       base09 = "#d65d0e";
+#       base0A = "#d79921";
+#       base0B = "#98971a";
+#       base0C = "#689d6a";
+#       base0D = "#458588";
+#       base0E = "#b16286";
+#       base0F = "#9d0006";
+#     };
+#     cursor = {
+#       package = pkgs.everforest-cursors;
+#       name = "everforest-cursors";
+#       size = 24;
+#     };
 
-    # bibata-cursors
-    # lyra-cursors
-    # phinger-cursors
-    # everforest-cursors
+#     # bibata-cursors
+#     # lyra-cursors
+#     # phinger-cursors
+#     # everforest-cursors
 
-    fonts = {
-      monospace ={
-        package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font Mono";
-      };
-    #   sansSerif = {
-    #     package = JetBrainsMono;
-    #     name = "JetBrainsMono Nerd Font";
-    #   };
-    #   serif = {
-    #     package = JetBrainsMono;
-    #     name = "JetBrainsMono Nerd Font";
-    #   };
-      emoji = {
-        package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font Propo";
-      };
-      # sizes = {
-      #   applications = 12;
-      #   terminal = 15;
-      #   desktop = 10;
-      #   popups = 10;
-      # };
-    };
-    opacity = {
-      applications = 1.0;
-      desktop = 1.0;
-      popups = 1.0;
-      terminal = 0.70;
-    };
-    polarity = "dark";
-    targets = {
-      grub.enable = false;
-      plymouth.enable = false;
-      # firefox.profileNames = ["default"];
-      };
-    };
+#     fonts = {
+#       monospace ={
+#         package = pkgs.nerd-fonts.jetbrains-mono;
+#         name = "JetBrainsMono Nerd Font Mono";
+#       };
+#     #   sansSerif = {
+#     #     package = JetBrainsMono;
+#     #     name = "JetBrainsMono Nerd Font";
+#     #   };
+#     #   serif = {
+#     #     package = JetBrainsMono;
+#     #     name = "JetBrainsMono Nerd Font";
+#     #   };
+#       emoji = {
+#         package = pkgs.nerd-fonts.jetbrains-mono;
+#         name = "JetBrainsMono Nerd Font Propo";
+#       };
+#       # sizes = {
+#       #   applications = 12;
+#       #   terminal = 15;
+#       #   desktop = 10;
+#       #   popups = 10;
+#       # };
+#     };
+#     opacity = {
+#       applications = 1.0;
+#       desktop = 1.0;
+#       popups = 1.0;
+#       terminal = 0.70;
+#     };
+#     polarity = "dark";
+#     targets = {
+#       grub.enable = false;
+#       plymouth.enable = false;
+#       # firefox.profileNames = ["default"];
+#       };
+#     };
     distro-grub-themes = {
         enable = true;
         theme = "nixos";
     };
-    boot.plymouth = {
-      enable = true;
-      theme = "spinning-nekoarc";
-      themePackages = with pkgs; [
-          # By default we would install all themes
-          # (adi1090x-plymouth-themes.override {
-          # selected_themes = [ "deus_ex" ];
-          # })
-          (pkgs.callPackage ../../modules/plymouth/spinning-nekoarc/spinning-nekoarc.nix {})
-          (pkgs.callPackage ../../modules/plymouth/duck/duck.nix {})
-      ];
-    };
+    # boot.plymouth = {
+    #   enable = true;
+    #   theme = "spinning-nekoarc";
+    #   themePackages = with pkgs; [
+    #       (pkgs.callPackage ../../modules/plymouth/spinning-nekoarc/spinning-nekoarc.nix {})
+    #       (pkgs.callPackage ../../modules/plymouth/duck/duck.nix {})
+    #   ];
+    # };
     fonts = {
       packages = with pkgs; [
         dejavu_fonts
@@ -458,9 +373,14 @@
 
   #SECTION: SYSTEM
 
-  networking.networkmanager.enable = true;
-    services.upower.enable = true;
-    services.power-profiles-daemon.enable = true;
+    networking.networkmanager.enable = true;
+    services.tlp = {
+        enable = true;
+        pd.enable = true;
+        setting = {
+            STOP_CHARGE_THRESH_BAT0 = 1;
+        };
+    };
     services.thermald.enable = true;
     time.timeZone = "Asia/Tehran";
     i18n.defaultLocale = "en_US.UTF-8";
@@ -476,33 +396,21 @@
       # use the example session manager (no others are packaged yet so this is enabled by default,no need to redefine it in your config for now)
       #media-session.enable = true;
     };
-    nix.settings = {
-      max-jobs = 1;
-      cores = 2;
-      keep-going = false;
-    };
     nixpkgs.config.allowUnfree = true;
     nix.settings.experimental-features = ["nix-command" "flakes"];
     boot= {
-      kernelPackages = pkgs.linuxPackages_latest;
-      consoleLogLevel = 3;
-      initrd.verbose = false;
+      kernelPackages = pkgs.linuxKernel.kernels.linux_zen;
       kernelParams = [
         "quiet"
         "splash"
-        "boot.shell_on_fail"
-        "udev.log_priority=3"
-        "rd.systemd.show_status=auto"
-        "rtw89_pci.disable_aspm_l1=y"
-        "rtw89_pci.disable_aspm_l1ss=y"
       ];
       loader = {
             systemd-boot.enable = false;
             efi.canTouchEfiVariables = true;
             timeout = 5;
             grub = {
-                efiSupport = true;
                 enable = true;
+                efiSupport = true;
                 useOSProber = true;
                 device = "nodev";
             };
@@ -518,54 +426,15 @@
       flake = "/etc/nixos/";
     };
 
-
-  #SECTION: NVIDIA
-
-  # Install nvidia drivers
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+        intel-media-driver
+        vpl-gpu-rt
+        intel-compute-runtime
+    ];
   };
+  services.xserver.videoDrivers = [ "modesetting"];
 
-  # Load nvidia and amd driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["amdgpu" "nvidia"];
-
-  hardware.nvidia = {
-
-    # Modesetting is required.
-    modesetting.enable = true;
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    # Enable this if you have graphical corruption issues or application crashes after waking
-    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
-    # of just the bare essentials.
-    powerManagement.enable = false;
-
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
-
-    # Use the NVidia open source kernel module (not to be confused with the
-    # independent third-party "nouveau" open source driver).
-    # Support is limited to the Turing and later architectures. Full list of 
-    # supported GPUs is at: 
-    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
-    # Only available from driver 515.43.04+
-    open = false;
-
-    # Enable the Nvidia settings menu,
-    # accessible via `nvidia-settings`.
-    nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;  # Provides nvidia-offload command
-      };
-      amdgpuBusId = "PCI:6:0:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
-  };
 }
