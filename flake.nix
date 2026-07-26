@@ -19,6 +19,10 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # dms-plugin-registry = {
+    #   url = "github:AvengeMedia/dms-plugin-registry";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
@@ -33,15 +37,16 @@
         inputs.stylix.nixosModules.stylix
       ];
     };
-    nixosConfigurations.io = nixpkgs.lib.nixosSystem { #Thunkbook Laptop
+    nixosConfigurations.io = nixpkgs.lib.nixosSystem { #Thinkbook Laptop
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
         ./hosts/io/configuration.nix
         inputs.distro-grub-themes.nixosModules.${"x86_64-linux"}.default
         inputs.home-manager.nixosModules.default
-        inputs.nixvim.nixosModules.nixvim
-        inputs.stylix.nixosModules.stylix
+        inputs.nixvim.nixosModules.default
+        inputs.stylix.nixosModules.default
+        # inputs.dms-plugin-registry.nixosModules.default
       ];
     };
   };

@@ -436,15 +436,7 @@
     };
     boot.plymouth = {
       enable = true;
-      theme = "spinning-nekoarc";
-      themePackages = with pkgs; [
-          # By default we would install all themes
-          # (adi1090x-plymouth-themes.override {
-          # selected_themes = [ "deus_ex" ];
-          # })
-          (pkgs.callPackage ../../modules/plymouth/spinning-nekoarc/spinning-nekoarc.nix {})
-          (pkgs.callPackage ../../modules/plymouth/duck/duck.nix {})
-      ];
+      theme = "bgrt";
     };
     fonts = {
       packages = with pkgs; [

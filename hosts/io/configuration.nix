@@ -13,7 +13,7 @@
   users.users.cosmomancer = {
     isNormalUser = true;
     description = "cosmomancer";
-    extraGroups = [ "networkmanager" "wheel" "input" "libvirtd"];
+    extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
@@ -51,6 +51,13 @@
 
   #SECTION: DEVELOPMENT
 
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-vulkan;
+    environmentVariables = {
+      "GGML_VK_DISABLE_F16" = "1";
+    };
+  };
   programs.nixvim = {
   enable = true;
   };
@@ -71,12 +78,19 @@
     git
     gh
     vscode
-    (python312.withPackages(pypkgs: with pypkgs;[
+    (python314.withPackages(pypkgs: with pypkgs;[
+    pillow
+    cairosvg
+    colorama
+    marko
+    requests
+    scrapy
+    beautifulsoup4
     peewee
     tkinter
     pygame
     numpy
-    pip
+    pip 
     jupyter
     pygobject3
     pydantic
@@ -94,7 +108,9 @@
     bcrypt
     asyncpg
     email-validator
+    dbus-python
     ]))
+    uv
     ruff
     pkg-config
     portaudio
@@ -119,20 +135,23 @@
 
     cockatrice
     steam
+    lutris
     heroic
+    # bottles #TODO
+    dxvk_2
     cmatrix
     cbonsai
     rust-stakeholder
     hollywood
     genact
     neo
+    toilet
     # wineWowPackages.waylandFull
-    # dxvk_2
     #shadps4
 
     #SECTION: DESKTOP
-
-    (bottles.override {removeWarningPopup = true;})
+    
+    davinci-resolve
     kiwix
     pinta
     kdePackages.okular
@@ -140,33 +159,43 @@
     impression
     vlc
     libreoffice
-    brave
+    onlyoffice-desktopeditors
     gimp-with-plugins
     krita
+    localsend
     inkscape-with-extensions
     obs-studio
     qimgv
-    nautilus
+    kdePackages.dolphin
+    libmtp
+    kdePackages.kio-extras
     obsidian
     telegram-desktop
-    bitwarden-desktop
+    bitwarden-cli #TODO swap back to bitwarden-desktop (electron marked unsafe)
     gnome-font-viewer
     anydesk
     nwg-look
     ghostty
-    alacritty
-    fuzzel
-    openshot-qt
+    foliate
+    blender
+    shotcut
+    gnome-calculator
     gnome-disk-utility
-    handbrake
+    # handbrake #TODO
     kdePackages.ark
-    kdiff3
+    meld
     losslesscut-bin
     strawberry
+    picard
     vesktop
+    firefox
+    brave
+    chromium
+    packet
     # grayjay
     #CLI TOOLS
     micro-full
+    # cpx #TODO enable after updating flake
     cpulimit
     p7zip
     wget
@@ -182,42 +211,68 @@
     brightnessctl
     fastfetch
     clock-rs
+    busybox
     jp2a
     bat
     unrar
     rar
     ripgrep
     tree
+    xeyes
     #WM
+    grim
+    hyprpolkitagent
     alsa-utils
-    hyprlock
-    waybar
-    rofi
-    networkmanagerapplet
+    libsForQt5.qt5ct
+    kdePackages.qt6ct
     bibata-cursors
-    lyra-cursors
-    phinger-cursors
-    everforest-cursors
     gruvbox-plus-icons
     ];
-    programs.niri = {
+    services.gvfs.enable = true;
+    services.udisks2.enable = true;
+    services.tumbler.enable = true;
+    services.udev.enable = true;
+    programs.niri.enable = true;
+    programs.hyprland = {
       enable = true;
-      useNautilus = true;
-      };
-    services.displayManager.gdm = {
-      enable = true;
-      wayland = true;
-      autoSuspend = false;
+      withUWSM = true;
+      xwayland.enable = true;
     };
-    # services.displayManager.cosmic-greeter.enable = true;
+    programs.dms-shell = {
+    	enable = true;
+    	systemd = {
+    		enable = true;
+    		restartIfChanged = true;
+    	};
+    };
+    programs.dsearch = {
+      enable = true;
+      systemd = {
+        enable = true;
+      };
+    };
+    services.displayManager.dms-greeter = {
+      enable = true;
+      configHome = "/home/cosmomancer";
+      compositor.name = "hyprland";
+    };
+    qt = {
+      enable = true;
+      platformTheme = "qt5ct";
+    };
 
     services.gnome.gnome-keyring.enable = true;
+    security.pam.services.login.enableGnomeKeyring = true;
+
+    security.polkit.enable = true;
+    # security.soteria.enable = true;
     
     programs.zoxide = {
       enable = true;
       enableZshIntegration = true;
     };
-    programs.nekoray = {
+    # programs.pay-respects.enable = true; #TODO check on for zsh interigation
+    programs.throne = {
       enable = true;
       tunMode.enable = true;
       tunMode.setuid = false;
@@ -279,93 +334,19 @@
       };
     };
 
-  #SECTION: THEME
-
-#   stylix = {
-#     enable = true;
-#     base16Scheme = {
-#       base00 = "#282828";
-#       base01 = "#3c3836";
-#       base02 = "#504945";
-#       base03 = "#665c54";
-#       base04 = "#928374";
-#       base05 = "#ebdbb2";
-#       base06 = "#fbf1c7";
-#       base07 = "#f9f5d7";
-#       base08 = "#cc241d";
-#       base09 = "#d65d0e";
-#       base0A = "#d79921";
-#       base0B = "#98971a";
-#       base0C = "#689d6a";
-#       base0D = "#458588";
-#       base0E = "#b16286";
-#       base0F = "#9d0006";
-#     };
-#     cursor = {
-#       package = pkgs.everforest-cursors;
-#       name = "everforest-cursors";
-#       size = 24;
-#     };
-
-#     # bibata-cursors
-#     # lyra-cursors
-#     # phinger-cursors
-#     # everforest-cursors
-
-#     fonts = {
-#       monospace ={
-#         package = pkgs.nerd-fonts.jetbrains-mono;
-#         name = "JetBrainsMono Nerd Font Mono";
-#       };
-#     #   sansSerif = {
-#     #     package = JetBrainsMono;
-#     #     name = "JetBrainsMono Nerd Font";
-#     #   };
-#     #   serif = {
-#     #     package = JetBrainsMono;
-#     #     name = "JetBrainsMono Nerd Font";
-#     #   };
-#       emoji = {
-#         package = pkgs.nerd-fonts.jetbrains-mono;
-#         name = "JetBrainsMono Nerd Font Propo";
-#       };
-#       # sizes = {
-#       #   applications = 12;
-#       #   terminal = 15;
-#       #   desktop = 10;
-#       #   popups = 10;
-#       # };
-#     };
-#     opacity = {
-#       applications = 1.0;
-#       desktop = 1.0;
-#       popups = 1.0;
-#       terminal = 0.70;
-#     };
-#     polarity = "dark";
-#     targets = {
-#       grub.enable = false;
-#       plymouth.enable = false;
-#       # firefox.profileNames = ["default"];
-#       };
-#     };
     distro-grub-themes = {
         enable = true;
-        theme = "nixos";
+        theme = "lenovo";
     };
-    # boot.plymouth = {
-    #   enable = true;
-    #   theme = "spinning-nekoarc";
-    #   themePackages = with pkgs; [
-    #       (pkgs.callPackage ../../modules/plymouth/spinning-nekoarc/spinning-nekoarc.nix {})
-    #       (pkgs.callPackage ../../modules/plymouth/duck/duck.nix {})
-    #   ];
-    # };
+    boot.plymouth = {
+      enable = true;
+      theme = "bgrt";
+    };
     fonts = {
       packages = with pkgs; [
         dejavu_fonts
         nerd-fonts.jetbrains-mono
-        vazir-fonts
+        vazirmatn
         shabnam-fonts
       ];
       fontDir.enable = true;
@@ -373,13 +354,20 @@
 
   #SECTION: SYSTEM
 
+    services.btrfs.autoScrub = {
+      enable = true;
+      interval = "weekly";
+    };
     networking.networkmanager.enable = true;
+    hardware.bluetooth.enable = true;
+    services.power-profiles-daemon.enable = false;
+    services.upower.enable = true;
     services.tlp = {
-        enable = true;
-        pd.enable = true;
-        setting = {
-            STOP_CHARGE_THRESH_BAT0 = 1;
-        };
+    	enable = true;
+    	pd.enable = true;
+    	settings = {
+    		STOP_CHARGE_THRESH_BAT0 = 1;
+    	};
     };
     services.thermald.enable = true;
     time.timeZone = "Asia/Tehran";
@@ -399,11 +387,18 @@
     nixpkgs.config.allowUnfree = true;
     nix.settings.experimental-features = ["nix-command" "flakes"];
     boot= {
-      kernelPackages = pkgs.linuxKernel.kernels.linux_zen;
+      kernelPackages = pkgs.linuxPackages_latest;
+      consoleLogLevel = 3;
+      initrd.verbose = false;
       kernelParams = [
         "quiet"
         "splash"
+        # "xe.force_probe=7dd1"
+        # "i915.force_probe=!7dd1"
       ];
+      # extraModprobeConfig = ''
+      #   options xe enable_dsb=0 enable_dc=0
+      # '';
       loader = {
             systemd-boot.enable = false;
             efi.canTouchEfiVariables = true;
@@ -429,12 +424,13 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    package = pkgs.mesa;
     extraPackages = with pkgs; [
         intel-media-driver
         vpl-gpu-rt
         intel-compute-runtime
     ];
   };
-  services.xserver.videoDrivers = [ "modesetting"];
+  services.xserver.videoDrivers = [ "modesetting" ];
 
 }
